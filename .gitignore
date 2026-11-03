@@ -8,6 +8,7 @@ src/main/java/net/awyvrix/bot/commands/custom/fun/
 data.json
 bot.json
 backup/
+logs/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
