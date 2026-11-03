@@ -1,0 +1,164 @@
+2026-11-01 18:29:31.336 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:29:31.340 [main] INFO  net.awyvrix.bot.Main - Config not found
+2026-11-01 18:29:31.341 [Thread-0] INFO  net.awyvrix.bot.Main - Shutting down...
+2026-11-01 18:31:18.747 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:31:18.748 [main] INFO  net.awyvrix.bot.Main - Config not found
+2026-11-01 18:31:18.749 [Thread-0] INFO  net.awyvrix.bot.Main - Shutting down...
+2026-11-01 18:33:38.201 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:33:38.202 [main] INFO  net.awyvrix.bot.Main - Config not found - Creating new
+2026-11-01 18:33:38.231 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:33:38.363 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:33:38.391 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:33:38.391 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:33:38.391 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800SECONDS 
+2026-11-01 18:33:38.392 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600SECONDS 
+2026-11-01 18:33:38.392 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:33:39.327 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:33:39.327 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:35:10.869 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:35:10.895 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:35:10.899 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:35:11.040 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:35:11.055 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:35:11.056 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:35:11.056 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 18:35:11.057 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 18:35:11.057 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:35:11.610 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:35:11.611 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:37:15.140 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:37:15.166 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:37:15.169 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:37:15.298 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:37:15.314 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:37:15.314 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:37:15.314 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 18:37:15.315 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 18:37:15.315 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:37:15.858 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:37:15.859 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:40:23.062 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:40:23.087 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:40:23.091 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:40:23.222 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:40:23.238 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:40:23.238 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:40:23.238 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 18:40:23.239 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 18:40:23.240 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:40:23.915 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:40:23.916 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:40:50.247 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:40:50.273 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:40:50.277 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:40:50.417 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:40:50.435 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:40:50.435 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:40:50.435 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 18:40:50.440 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 18:40:50.441 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:40:51.001 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:40:51.002 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:49:41.679 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:49:41.704 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:49:41.707 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:49:41.844 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:49:41.862 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:49:41.862 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:49:41.862 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 18:49:41.864 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 18:49:41.867 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:49:42.433 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:49:42.434 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:50:14.979 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:50:15.004 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:50:15.006 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:50:15.133 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:50:15.148 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:50:15.148 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:50:15.149 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-01 18:50:15.150 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 18:50:15.150 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:50:15.150 [main] WARN  net.awyvrix.bot.Main - Bot is launched it test mode
+2026-11-01 18:50:15.695 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:50:15.695 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:50:43.734 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:50:43.759 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:50:43.763 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:50:43.887 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:50:43.903 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:50:43.903 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:50:43.903 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-01 18:50:43.904 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 10 SECONDS 
+2026-11-01 18:50:43.904 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:50:43.904 [main] WARN  net.awyvrix.bot.Main - Bot is launched it test mode
+2026-11-01 18:50:44.458 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:50:44.459 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:51:30.902 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:51:30.929 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:51:30.932 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:51:31.067 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:51:31.084 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:51:31.084 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:51:31.084 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-01 18:51:31.088 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 10 SECONDS 
+2026-11-01 18:51:31.089 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:51:31.090 [main] WARN  net.awyvrix.bot.Main - Bot is launched it test mode
+2026-11-01 18:51:31.654 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:51:31.655 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 18:52:04.205 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 18:52:04.231 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 18:52:04.234 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 18:52:04.372 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 18:52:04.390 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 18:52:04.390 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 18:52:04.391 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-01 18:52:04.394 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 10 SECONDS 
+2026-11-01 18:52:04.396 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 18:52:04.396 [main] WARN  net.awyvrix.bot.Main - Bot is launched it test mode
+2026-11-01 18:52:04.961 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 18:52:04.962 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 19:13:53.249 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 19:13:53.274 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 19:13:53.278 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 19:13:53.402 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 19:13:53.416 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 19:13:53.416 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 19:13:53.416 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 19:13:53.418 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 19:13:53.418 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 19:13:54.057 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 19:13:54.059 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 19:14:05.835 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 19:14:05.836 [main] INFO  net.awyvrix.bot.Main - Config not found - Creating new
+2026-11-01 19:14:05.859 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 19:14:05.984 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 19:14:06.014 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 19:14:06.015 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 19:14:06.015 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 19:14:06.016 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 19:14:06.016 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 19:14:06.587 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 19:14:06.588 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 19:17:02.908 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 19:17:02.909 [main] INFO  net.awyvrix.bot.Main - Config not found - Creating new
+2026-11-01 19:17:02.931 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 19:17:03.055 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 19:17:03.081 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 19:17:03.081 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 19:17:03.082 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 19:17:03.083 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 19:17:03.083 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 19:17:03.736 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 19:17:03.736 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-01 19:19:16.275 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-01 19:19:16.300 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-01 19:19:16.304 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-01 19:19:16.427 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-01 19:19:16.441 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-01 19:19:16.441 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-01 19:19:16.441 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-01 19:19:16.442 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-01 19:19:16.445 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-01 19:19:16.991 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-01 19:19:16.992 [main] INFO  net.awyvrix.bot.Main - All systems online

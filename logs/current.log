@@ -1,0 +1,427 @@
+2026-11-03 22:13:16.728 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:13:16.733 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:13:16.741 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:13:16.746 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:13:16.912 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:13:16.956 [main] INFO  net.awyvrix.bot.Main - Recovering Data...
+2026-11-03 22:13:16.958 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:13:16.958 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:13:16.958 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:13:16.960 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:13:16.960 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:13:16.960 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:13:17.812 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 852ms
+2026-11-03 22:13:18.331 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:13:18.331 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:13:31.130 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:13:31.132 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:13:31.136 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:13:31.140 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:13:31.275 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:13:31.295 [main] INFO  net.awyvrix.bot.Main - Recovering Data...
+2026-11-03 22:13:31.295 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:13:31.295 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:13:31.295 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:13:31.298 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:13:31.298 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:13:31.298 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:13:31.942 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 643ms
+2026-11-03 22:13:32.444 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:13:32.446 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:26:32.707 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:26:32.709 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:26:32.713 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:26:32.717 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:26:32.853 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:26:32.869 [main] INFO  net.awyvrix.bot.Main - Recovering Data...
+2026-11-03 22:26:32.869 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:26:32.871 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:26:32.871 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:26:32.872 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:26:32.872 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:26:32.872 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:26:32.873 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:26:33.584 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 711ms
+2026-11-03 22:26:34.083 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:26:34.085 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:27:45.428 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:27:45.429 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:27:45.433 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:27:45.438 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:27:45.578 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:27:45.599 [main] INFO  net.awyvrix.bot.Main - Recovering Data...
+2026-11-03 22:27:45.599 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:27:45.599 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:27:45.599 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:27:45.601 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:27:45.602 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:27:45.602 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:27:45.602 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:27:46.249 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 646ms
+2026-11-03 22:27:46.748 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:27:46.748 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:27:58.494 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:27:58.495 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:27:58.500 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:27:58.505 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:27:58.642 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:27:58.657 [main] INFO  net.awyvrix.bot.Main - Recovering Data...
+2026-11-03 22:27:58.657 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:27:58.657 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:27:58.659 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:27:58.660 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:27:58.660 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:27:58.660 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:27:58.660 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:27:59.405 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 744ms
+2026-11-03 22:27:59.912 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:27:59.913 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:28:02.485 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Telegram API OK: 114ms
+2026-11-03 22:28:31.561 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:28:31.563 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:28:31.569 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:28:31.573 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:28:31.731 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:28:31.754 [main] INFO  net.awyvrix.bot.Main - Recovering Data...
+2026-11-03 22:28:31.754 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:28:31.755 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:28:31.755 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:28:31.758 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:28:31.759 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:28:31.760 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:28:31.760 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:28:32.394 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 634ms
+2026-11-03 22:28:32.901 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:28:32.902 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:29:03.034 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:29:03.036 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:29:03.040 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:29:03.045 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:29:03.192 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:29:03.214 [main] INFO  net.awyvrix.bot.Main - Recovering Data...
+2026-11-03 22:29:03.214 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:29:03.214 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:29:03.216 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:29:03.217 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:29:03.219 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:29:03.219 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:29:03.220 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:29:03.850 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 629ms
+2026-11-03 22:29:04.356 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:29:04.356 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:30:50.019 [pool-7-thread-1] INFO  net.awyvrix.bot.Main - Telegram API OK: 117ms
+2026-11-03 22:32:19.866 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:32:19.867 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:32:19.872 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:32:19.876 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:32:20.020 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:32:20.023 [Thread-0] INFO  net.awyvrix.bot.Main - Shutting down...
+2026-11-03 22:32:20.023 [Thread-0] INFO  net.awyvrix.bot.Main - DebugScheduler Stopped
+2026-11-03 22:32:20.023 [Thread-0] INFO  net.awyvrix.bot.Main - PublicationScheduler Stopped
+2026-11-03 22:32:20.023 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:32:20.023 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:33:43.123 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:33:43.125 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:33:43.129 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:33:43.135 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:33:43.307 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:33:43.310 [Thread-0] INFO  net.awyvrix.bot.Main - Shutting down...
+2026-11-03 22:33:43.310 [Thread-0] INFO  net.awyvrix.bot.Main - DebugScheduler Stopped
+2026-11-03 22:33:43.310 [Thread-0] INFO  net.awyvrix.bot.Main - PublicationScheduler Stopped
+2026-11-03 22:33:43.310 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:33:43.310 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:39:30.666 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:39:30.669 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:39:30.673 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:39:30.678 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:39:30.821 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:39:30.824 [Thread-0] INFO  net.awyvrix.bot.Main - Shutting down...
+2026-11-03 22:39:30.824 [Thread-0] INFO  net.awyvrix.bot.Main - DebugScheduler Stopped
+2026-11-03 22:39:30.824 [Thread-0] INFO  net.awyvrix.bot.Main - PublicationScheduler Stopped
+2026-11-03 22:39:30.824 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:39:30.824 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:41:16.315 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:41:16.316 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:41:16.321 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:41:16.325 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:41:16.460 [main] INFO  net.awyvrix.bot.Main - Bot data loaded
+2026-11-03 22:41:16.461 [Thread-0] INFO  net.awyvrix.bot.Main - Shutting down...
+2026-11-03 22:41:16.461 [Thread-0] INFO  net.awyvrix.bot.Main - DebugScheduler Stopped
+2026-11-03 22:41:16.461 [Thread-0] INFO  net.awyvrix.bot.Main - PublicationScheduler Stopped
+2026-11-03 22:41:16.461 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:41:16.461 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
+2026-11-03 22:41:45.353 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:41:45.354 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:41:45.358 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:41:45.363 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:41:45.513 [main] INFO  net.awyvrix.bot.Main - Bot data not found - Creating new
+2026-11-03 22:41:45.513 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:41:45.513 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:41:45.514 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:41:45.517 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:41:45.517 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:41:45.517 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:41:45.517 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:41:46.248 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 729ms
+2026-11-03 22:41:46.751 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:41:46.753 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:42:26.393 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Telegram API OK: 110ms
+2026-11-03 22:42:26.659 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Telegram API OK: 118ms
+2026-11-03 22:42:29.260 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:44:46.207 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:44:46.208 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:44:46.213 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:44:46.218 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:44:46.366 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:44:46.366 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:44:46.368 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:44:46.368 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:44:46.371 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:44:46.371 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:44:46.371 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:44:46.372 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:44:47.129 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 757ms
+2026-11-03 22:44:47.632 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:44:47.632 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:44:49.791 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:48:45.498 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:48:45.500 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:48:45.504 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:48:45.507 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:48:45.646 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:48:45.647 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:48:45.647 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:48:45.648 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:48:45.651 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:48:45.652 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:48:45.652 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:48:45.653 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:48:46.297 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 644ms
+2026-11-03 22:48:46.798 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:48:46.798 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:48:48.198 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:49:06.394 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:50:24.550 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:51:41.253 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:51:41.255 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:51:41.259 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:51:41.263 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:51:41.403 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:51:41.404 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:51:41.404 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:51:41.405 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:51:41.408 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:51:41.409 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:51:41.409 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:51:41.409 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:51:42.134 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 725ms
+2026-11-03 22:51:42.662 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:51:42.663 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:51:44.113 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:51:59.055 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:51:59.057 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:51:59.062 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:51:59.066 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:51:59.210 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:51:59.211 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:51:59.211 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:51:59.212 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:51:59.215 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:51:59.216 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:51:59.216 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:51:59.216 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:51:59.847 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 630ms
+2026-11-03 22:52:00.354 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:52:00.354 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:52:19.894 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:52:19.896 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:52:19.900 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:52:19.904 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:52:20.044 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:52:20.045 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:52:20.045 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:52:20.045 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:52:20.048 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:52:20.048 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:52:20.048 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:52:20.049 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:52:20.671 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 622ms
+2026-11-03 22:52:21.181 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:52:21.181 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:52:22.392 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:52:39.493 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:53:10.141 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:53:10.143 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:53:10.146 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:53:10.149 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:53:10.289 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:53:10.289 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:53:10.289 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:53:10.291 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:53:10.294 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:53:10.294 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:53:10.294 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:53:10.295 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:53:10.928 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 633ms
+2026-11-03 22:53:11.441 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:53:11.441 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:54:33.253 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:54:33.255 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:54:33.259 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:54:33.263 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:54:33.400 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:54:33.402 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:54:33.402 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:54:33.402 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:54:33.405 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:54:33.405 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:54:33.406 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:54:33.406 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:54:34.031 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 625ms
+2026-11-03 22:54:34.541 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:54:34.542 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:54:43.339 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Forced Backup executed
+  |Actor: awyvrix
+2026-11-03 22:56:29.427 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:56:29.429 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:56:29.432 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 22:56:29.437 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:56:29.577 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:56:29.578 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:56:29.578 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:56:29.578 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 1800 SECONDS 
+2026-11-03 22:56:29.581 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:56:29.582 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:56:29.582 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:56:29.582 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:56:30.308 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 724ms
+2026-11-03 22:56:30.814 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:56:30.814 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 22:57:58.697 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 22:57:58.698 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 22:57:58.700 [main] INFO  net.awyvrix.bot.Main - Config not found - Creating new
+2026-11-03 22:57:58.713 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 22:57:58.852 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 22:57:58.853 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 22:57:58.853 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 22:57:58.853 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-03 22:57:58.856 [main] INFO  net.awyvrix.bot.Main - Started UserProcessor with period: 600 SECONDS 
+2026-11-03 22:57:58.856 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 22:57:58.856 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 22:57:58.857 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 22:57:58.857 [main] WARN  net.awyvrix.bot.Main - Bot is launched it test mode
+2026-11-03 22:57:59.462 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 606ms
+2026-11-03 22:57:59.954 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 22:57:59.955 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 23:02:54.004 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 23:02:54.007 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 23:02:54.011 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 23:02:54.014 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 23:02:54.166 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 23:02:54.167 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 23:02:54.167 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 23:02:54.168 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-03 23:02:54.170 [main] INFO  net.awyvrix.bot.Main - Started UserUpdateScheduler with period: 600 SECONDS 
+2026-11-03 23:02:54.171 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 23:02:54.171 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 23:02:54.172 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 23:02:54.172 [main] WARN  net.awyvrix.bot.Main - Bot is launched it test mode
+2026-11-03 23:02:54.914 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 742ms
+2026-11-03 23:02:55.427 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 23:02:55.428 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 23:06:27.093 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 23:06:27.094 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 23:06:27.098 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 23:06:27.102 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 23:06:27.241 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 23:06:27.242 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 23:06:27.242 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 23:06:27.243 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-03 23:06:27.246 [main] INFO  net.awyvrix.bot.Main - Started UserUpdateScheduler with period: 600 SECONDS 
+2026-11-03 23:06:27.247 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 23:06:27.247 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 23:06:27.247 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 23:06:27.247 [main] WARN  net.awyvrix.bot.Main - Bot is launched it Test mode
+2026-11-03 23:06:27.986 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 738ms
+2026-11-03 23:06:28.484 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 23:06:28.485 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 23:14:20.684 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 23:14:20.685 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 23:14:20.689 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 23:14:20.693 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 23:14:20.831 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 23:14:20.832 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 23:14:20.833 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 23:14:20.833 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-03 23:14:20.837 [main] INFO  net.awyvrix.bot.Main - Started UserUpdateScheduler with period: 600 SECONDS 
+2026-11-03 23:14:20.837 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 23:14:20.838 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 23:14:20.838 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 23:14:20.838 [main] WARN  net.awyvrix.bot.Main - Bot is launched it Test mode
+2026-11-03 23:14:21.468 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 630ms
+2026-11-03 23:14:21.971 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 23:14:21.972 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 23:18:26.664 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Telegram API OK: 99ms
+2026-11-03 23:18:35.440 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Telegram API OK: 99ms
+2026-11-03 23:46:59.247 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 23:46:59.249 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 23:46:59.254 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 23:46:59.256 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 23:46:59.381 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 23:46:59.382 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 23:46:59.382 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 23:46:59.382 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-03 23:46:59.384 [main] INFO  net.awyvrix.bot.Main - Started UserUpdateScheduler with period: 600 SECONDS 
+2026-11-03 23:46:59.384 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 23:46:59.384 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 23:46:59.384 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 23:46:59.384 [main] WARN  net.awyvrix.bot.Main - Bot is launched it Test mode
+2026-11-03 23:47:00.132 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 747ms
+2026-11-03 23:47:00.579 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 23:47:00.580 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 23:47:01.087 [pool-6-thread-1] INFO  net.awyvrix.bot.Main - Telegram API OK: 106ms
+2026-11-03 23:49:56.955 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 23:49:56.956 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 23:49:56.961 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 23:49:56.962 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 23:49:57.087 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 23:49:57.088 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 23:49:57.088 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 23:49:57.088 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-03 23:49:57.090 [main] INFO  net.awyvrix.bot.Main - Started UserUpdateScheduler with period: 600 SECONDS 
+2026-11-03 23:49:57.090 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 23:49:57.090 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 23:49:57.090 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 23:49:57.090 [main] WARN  net.awyvrix.bot.Main - Bot is launched it Test mode
+2026-11-03 23:49:57.650 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 559ms
+2026-11-03 23:49:58.107 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 23:49:58.108 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 23:50:25.072 [main] INFO  net.awyvrix.bot.Main - StaticConfig loaded
+2026-11-03 23:50:25.074 [main] INFO  net.awyvrix.bot.Main - Starting bot...
+2026-11-03 23:50:25.077 [main] INFO  net.awyvrix.bot.Main - Config loaded
+2026-11-03 23:50:25.079 [main] INFO  net.awyvrix.bot.Main - All commands registered
+2026-11-03 23:50:25.200 [main] INFO  net.awyvrix.bot.Main - Bot data not found or empty - Creating new
+2026-11-03 23:50:25.201 [main] INFO  net.awyvrix.bot.Main - All admins registered
+2026-11-03 23:50:25.201 [main] INFO  net.awyvrix.bot.Main - All developers registered
+2026-11-03 23:50:25.202 [main] INFO  net.awyvrix.bot.Main - Started PublicationScheduler with period: 5 SECONDS 
+2026-11-03 23:50:25.203 [main] INFO  net.awyvrix.bot.Main - Started UserUpdateScheduler with period: 600 SECONDS 
+2026-11-03 23:50:25.203 [main] INFO  net.awyvrix.bot.Main - Started DebugScheduler with period: 15 SECONDS 
+2026-11-03 23:50:25.204 [main] INFO  net.awyvrix.bot.Main - Started BackupScheduler with period: 1 HOURS 
+2026-11-03 23:50:25.204 [main] INFO  net.awyvrix.bot.Main - Bot started
+2026-11-03 23:50:25.204 [main] WARN  net.awyvrix.bot.Main - Bot is launched it Test mode
+2026-11-03 23:50:25.816 [main] INFO  net.awyvrix.bot.Main - Telegram API OK: 611ms
+2026-11-03 23:50:26.320 [main] INFO  o.t.t.longpolling.BotSession - Result when calling deleteWebhook: true
+2026-11-03 23:50:26.321 [main] INFO  net.awyvrix.bot.Main - All systems online
+2026-11-03 23:50:34.209 [Thread-0] INFO  net.awyvrix.bot.Main - Shutting down...
+2026-11-03 23:50:34.213 [Thread-0] INFO  net.awyvrix.bot.Main - DebugScheduler Stopped
+2026-11-03 23:50:34.213 [Thread-0] INFO  net.awyvrix.bot.Main - PublicationScheduler Stopped
+2026-11-03 23:50:34.213 [Thread-0] INFO  net.awyvrix.bot.Main - UserUpdateScheduler Stopped
+2026-11-03 23:50:34.213 [Thread-0] INFO  net.awyvrix.bot.Main - UserProcessor Stopped
