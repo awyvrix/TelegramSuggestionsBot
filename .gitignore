@@ -7,7 +7,7 @@ build/
 src/main/java/net/awyvrix/bot/commands/custom/fun/
 data.json
 bot.json
-backup/
+config.json
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -45,3 +45,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+
+/logs/
+/backup/

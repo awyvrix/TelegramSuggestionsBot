@@ -4,15 +4,18 @@ import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.config.StaticConfigManager;
 import net.awyvrix.bot.media.Media;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
+import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
+import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
+import java.util.List;
 
 public class Util {
     public static boolean executeRights(TelegramClient client, Update update) throws TelegramApiException {
@@ -56,5 +59,15 @@ public class Util {
         try (var in = java.net.URI.create(url).toURL().openStream()) {
             return sha256(in.readAllBytes());
         }
+    }
+
+    public static void replyEmoji(TelegramClient client, long chatId, int messageId, String emoji) throws TelegramApiException {
+        SetMessageReaction reaction = SetMessageReaction.builder()
+                .chatId(chatId)
+                .messageId(messageId)
+                .reactionTypes(List.of(new ReactionTypeEmoji(emoji)))
+                .build();
+
+        client.execute(reaction);
     }
 }

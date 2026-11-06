@@ -1,6 +1,7 @@
 package net.awyvrix.bot.commands.custom;
 
 import net.awyvrix.bot.Main;
+import net.awyvrix.bot.Util;
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.BotData;
@@ -9,6 +10,7 @@ import net.awyvrix.bot.init.MediaParser;
 import net.awyvrix.bot.media.Media;
 import net.awyvrix.bot.media.Submission;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.message.Message;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
@@ -39,15 +41,17 @@ public final class MediaProcessor implements Command {
 
     @Override
     public void execute(Update update, TelegramClient client) throws TelegramApiException {
-        String author = update.getMessage().getFrom().getUserName();
-        long authorId = update.getMessage().getFrom().getId();
+        Message message = update.getMessage();
+        String author = message.getFrom().getUserName();
+        long authorId = message.getFrom().getId();
+        int messageId = message.getMessageId();
         Media media = MediaParser.parse(update);
 
         if (media == null) return;
         BotData.sentContent++;
         User user = getOrCreate(authorId, author);
         boolean anon = Main.data.getAnon(authorId, author);
-        Submission submission = new Submission(authorId, author, anon, false, media);
+        Submission submission = new Submission(authorId, messageId, author, anon, false, media);
         user.updateUsername(author);
 
         String hash = null;
@@ -55,40 +59,57 @@ public final class MediaProcessor implements Command {
             hash = getMediaHash(client, media);
         } catch (Exception e) {
             LOGGER.error("Cannot get file hash", e);
+            networkMonitor.hashFailures++;
         }
 
         if (Math.floor(user.rating) + config.BASIC_ACTIONS <= 0) {
-            sendMessage(client, update, "❌ Вы были перманентно забанены за свои деяния [м2]");
+            Util.replyEmoji(client, authorId, messageId, "\uD83D\uDC4E");
+            Util.sendMessage(client, update, "❌ Вы были перманентно забанены за свои деяния [м2]");
+            return;
+
         } if (config.TEST_MODE) {
-            sendMessage(client, update, "⚠ Бот находится в тестовом режиме. Контент может быть не отправлен. Попробуйте позже");
+            Util.sendMessage(client, update, "⚠ Бот находится в тестовом режиме. Контент может быть не отправлен. Попробуйте позже");
+
         } if (user.actions <= 0) {
             BotData.spamBlocked++;
             user.rating -= config.SPAM_FINE;
-            sendMessage(client, update, "❌ Контент не был отправлен: Слишком частые запросы [м2]");
+            Util.replyEmoji(client, authorId, messageId, "\uD83D\uDC4E");
+            Util.sendMessage(client, update, "❌ Контент не был отправлен: Слишком частые запросы [м2]");
             return;
+
         } if (sentContent.contains(media.uniqueId()) || sentHashedContent.contains(hash)) {
             BotData.repeatBlocked++;
             user.rating -= config.REPEAT_FINE;
-            sendMessage(client, update, "❌ Контент не был отправлен: \uD83E\uDE97 [м0]");
+            Util.replyEmoji(client, authorId, messageId, "\uD83D\uDC4E");
+            Util.sendMessage(client, update, "❌ Контент не был отправлен: \uD83E\uDE97 [м0]");
             return;
+
         } if (onModContent.contains(media.uniqueId())) {
             BotData.spamBlocked++;
             user.rating -= config.MOD_SPAM_FINE;
-            sendMessage(client, update, "❌ Контент не был отправлен: Уже на модерации [м1]");
+            Util.replyEmoji(client, authorId, messageId, "\uD83D\uDC4E");
+            Util.sendMessage(client, update, "❌ Контент не был отправлен: Уже на модерации [м1]");
             return;
+
         } if (Main.data.getAdmin(authorId)) {
             Main.submit(submission, false);
-            sendMessage(client, update, "⚙\uFE0F Контент принудительно отправлен");
+            Util.replyEmoji(client, authorId, messageId, "\uD83D\uDC4D");
+            Util.sendMessage(client, update, "⚙\uFE0F Контент принудительно отправлен");
+            user.addSent();
+
         } else {
             BotData.appliedContent++;
             long submissionId = NEXT_ID.incrementAndGet();
             submissions.put(submissionId, submission);
+
             Main.sendToModeration(media, submissionId);
             onModContent.addToSent(media.uniqueId());
             sentHashedContent.addToSent(hash);
-            sendMessage(client, update, "\uD83D\uDCE5 Контент отправлен на модерацию");
+
+            user.addSent();
             user.actions--;
+            Util.replyEmoji(client, authorId, messageId, "\uD83D\uDC40");
+            Util.sendMessage(client, update, "\uD83D\uDCE5 Контент отправлен на модерацию");
         }
-        user.addSent();
     }
 }

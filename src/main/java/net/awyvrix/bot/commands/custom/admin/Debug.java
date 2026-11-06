@@ -57,7 +57,10 @@ public final class Debug implements Command {
                     .append("\n---\nNetwork:")
                     .append("\n | LastSuccess: ").append(Main.networkMonitor.lastSuccess / 1_000_000)
                     .append("\n | Failures: ").append(Main.networkMonitor.totalFailures)
-                    .append("\n | Latency: ").append(Main.networkMonitor.latency + "ms");
+                    .append("\n | Hash Failures: ").append(Main.networkMonitor.hashFailures)
+                    .append("\n | Latency: ").append(Main.networkMonitor.latency + "ms")
+                    .append("\n | Downtime: ").append(Main.networkMonitor.downtime + "ms")
+                    .append("\n | LongestDowntime: ").append(Main.networkMonitor.longestDowntime + "ms");
 
             sendMessage(client, update, debug.toString());
         }

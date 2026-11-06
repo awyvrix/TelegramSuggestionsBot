@@ -3,12 +3,15 @@ package net.awyvrix.bot.media;
 import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.user.UserData;
 import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
+import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -40,9 +43,11 @@ public final class ModerationHandler {
     }
 
     private void reject(CallbackQuery query, long submissionId) throws TelegramApiException {
+        Submission submission = submissions.get(submissionId);
         submissions.remove(submissionId);
         deleteModerationMessage(query);
         answer(query, "Отклонено");
+        if (submission.chatId() != 0) replyStatus(submission.authorId(), submission.chatId(), "\uD83D\uDC4E");
     }
 
     private void approve(CallbackQuery query, long submissionId, boolean spoiler) throws TelegramApiException {
@@ -52,6 +57,7 @@ public final class ModerationHandler {
             publisher.submit(submission, spoiler);
             deleteModerationMessage(query);
             answer(query, spoiler ? "Опубликовано со спойлером" : "Опубликовано");
+            if (submission.chatId() != 0) replyStatus(submission.authorId(), submission.chatId(), "\uD83D\uDC4D");
 
             User user = UserData.get(submission.authorId());
             if (user != null) user.rating += config.ACCEPT_BONUS;
@@ -73,5 +79,15 @@ public final class ModerationHandler {
                 .callbackQueryId(query.getId())
                 .text(text)
                 .build());
+    }
+
+    private void replyStatus(long chatId, int messageId, String emoji) throws TelegramApiException {
+        SetMessageReaction reaction = SetMessageReaction.builder()
+                .chatId(chatId)
+                .messageId(messageId)
+                .reactionTypes(List.of(new ReactionTypeEmoji(emoji)))
+                .build();
+
+        client.execute(reaction);
     }
 }
