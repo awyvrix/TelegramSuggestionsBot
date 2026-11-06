@@ -1,7 +1,6 @@
-package net.awyvrix.bot.data.backup;
+package net.awyvrix.bot.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.awyvrix.bot.data.BotData;
 import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.util.DataSnapshot;
 import net.awyvrix.bot.media.Submission;
@@ -19,7 +18,7 @@ import java.util.Map;
 import static net.awyvrix.bot.Main.*;
 import static net.awyvrix.bot.data.user.UserData.users;
 import static net.awyvrix.bot.media.ModerationHandler.NEXT_ID;
-import static net.awyvrix.bot.media.PublicationScheduler.queue;
+import static net.awyvrix.bot.media.Publisher.queue;
 
 public final class BackupDataManager {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy - HH.mm.ss");

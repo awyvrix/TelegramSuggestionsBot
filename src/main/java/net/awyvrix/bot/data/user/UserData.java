@@ -16,31 +16,15 @@ public final class UserData {
         return users.get(id);
     }
 
-    public boolean switchAnon(long id, String username) {
-        return getOrCreate(id, username).setAnonymous();
+    public boolean switchTag(long id, String username, UserTag tag) {
+        return getOrCreate(id, username).switchTag(tag);
     }
 
-    public boolean getAnon(long id, String username) {
-        return getOrCreate(id, username).isAnonymous;
+    public boolean getTag(long id, String username, UserTag tag) {
+        return getOrCreate(id, username).getTag(tag);
     }
 
-    public void addAdmin(long id, String name) {
-        getOrCreate(id, name).setAdmin(true);
-    }
-
-    public void addDeveloper(long id, String name) {
-        getOrCreate(id, name).setDeveloper(true);
-    }
-
-    public boolean getAdmin(long id) {
-        User user = get(id);
-        if (user == null) return false;
-        return user.isAdmin;
-    }
-
-    public boolean getDeveloper(long id) {
-        User user = get(id);
-        if (user == null) return false;
-        return user.isDeveloper;
+    public void setTag(long id, String username, UserTag tag, boolean isPresent) {
+        getOrCreate(id, username).setTag(tag, isPresent);
     }
 }

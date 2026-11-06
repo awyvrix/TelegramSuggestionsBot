@@ -5,7 +5,8 @@ import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.user.UserData;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.generics.TelegramClient;
+
+import java.util.Set;
 
 import static net.awyvrix.bot.Util.sendMessage;
 import static net.awyvrix.bot.data.BotData.*;
@@ -23,13 +24,13 @@ public final class Statistics implements Command {
     }
 
     @Override
-    public CommandType type() {
-        return CommandType.DEFAULT;
+    public Set<CommandType> types() {
+        return Set.of(CommandType.DEFAULT);
     }
 
     @Override
-    public void execute(Update update, TelegramClient client) throws TelegramApiException {
-        sendMessage(client, update,"Статистика:\n" +
+    public void execute(Update update) throws TelegramApiException {
+        sendMessage(update,"Статистика:\n" +
                 " | Отправлено контента: " + sentContent + "\n" +
                 " | Отправлено на модерацию: " + appliedContent + "\n" +
                 " | Одобрено контента: " + approvedContent + "\n" +

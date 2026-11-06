@@ -3,11 +3,12 @@ package net.awyvrix.bot.init;
 import net.awyvrix.bot.Main;
 import net.awyvrix.bot.commands.CommandRegistry;
 import net.awyvrix.bot.commands.custom.*;
-import net.awyvrix.bot.commands.custom.admin.*;
+import net.awyvrix.bot.commands.custom.attachments.MediaProcessor;
+import net.awyvrix.bot.commands.custom.developer.*;
 import net.awyvrix.bot.commands.custom.fun.Gos;
+import net.awyvrix.bot.commands.custom.fun.LoreReport;
 import net.awyvrix.bot.commands.custom.fun.Number;
 import net.awyvrix.bot.commands.custom.fun.Object;
-import net.awyvrix.bot.commands.custom.fun.LoreReport;
 import net.awyvrix.bot.data.config.ConfigManager;
 
 import static net.awyvrix.bot.Main.LOGGER;
@@ -25,6 +26,7 @@ public final class CommandsInit {
         registry.register(new Backup());
         registry.register(new AdminList());
         registry.register(new Debug());
+        registry.register(new Report());
 
         registry.register(new Anon());
         registry.register(new Statistics());
@@ -41,6 +43,7 @@ public final class CommandsInit {
             registry.register(new LoreReport());
         }
 
+        registry.setInitialised();
         LOGGER.info("All commands registered");
     }
 }

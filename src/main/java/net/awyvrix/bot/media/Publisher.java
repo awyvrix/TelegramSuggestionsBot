@@ -6,20 +6,18 @@ import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-import java.io.IOException;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static net.awyvrix.bot.Main.*;
 import static net.awyvrix.bot.data.user.UserData.getOrCreate;
-import static net.awyvrix.bot.media.PublicationScheduler.queue;
 
 public final class Publisher {
-    private final TelegramClient client;
+    public static final Queue<Submission> queue = new ConcurrentLinkedQueue<>();
     private final long channelId;
 
-    public Publisher(TelegramClient client, long channelId) {
-        this.client = client;
+    public Publisher(long channelId) {
         this.channelId = channelId;
     }
 
@@ -30,7 +28,7 @@ public final class Publisher {
         queue.add(submission.setSpoiler(spoiler));
     }
 
-    public void publish() throws TelegramApiException, IOException {
+    public void publish() throws TelegramApiException {
         Submission submission = queue.poll();
 
         if (submission == null) return;
@@ -60,7 +58,6 @@ public final class Publisher {
                     .build());
         }
         publishedContent.addToSent(submission.media().uniqueId());
-        dataManager.save();
     }
 
     private String createCaption(Submission submission) {

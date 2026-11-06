@@ -3,6 +3,10 @@ package net.awyvrix.bot.debug;
 import org.telegram.telegrambots.meta.api.methods.GetMe;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import static net.awyvrix.bot.Main.LOGGER;
 
 public final class NetworkMonitor {
@@ -15,9 +19,11 @@ public final class NetworkMonitor {
     public volatile int hashFailures;
 
     public volatile long downtime;
-    public volatile long longestDowntime = Long.MIN_VALUE;
+    public volatile long longestDowntime = 0;
 
     private long downStart;
+    private LocalDateTime downStartTime;
+    public List<NetworkReport> networkReports = new ArrayList<>();
 
     public NetworkMonitor(TelegramClient client) {
         this.client = client;
@@ -36,7 +42,8 @@ public final class NetworkMonitor {
             if (downStart != 0) downtimeUpdate();
             failures = 0;
         } catch (Exception e) {
-            downStart = System.currentTimeMillis();
+            if (downStart == 0) downStart = System.currentTimeMillis();
+            if (downStart == 0) downStartTime = LocalDateTime.now();
             failures++;
             totalFailures++;
             LOGGER.error("Telegram API failure #{}: {}", failures, e.toString());
@@ -47,6 +54,7 @@ public final class NetworkMonitor {
         long time = System.currentTimeMillis() - downStart;
         downtime += time;
         longestDowntime = Math.max(longestDowntime, time);
+        networkReports.add(new NetworkReport(downStartTime, LocalDateTime.now(), time));
         downStart = 0;
     }
 }

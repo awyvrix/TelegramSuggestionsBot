@@ -1,13 +1,14 @@
-package net.awyvrix.bot.commands.custom.admin;
+package net.awyvrix.bot.commands.custom.developer;
 
 import net.awyvrix.bot.Main;
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
+import net.awyvrix.bot.data.user.UserTag;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.io.IOException;
+import java.util.Set;
 
 import static net.awyvrix.bot.Main.LOGGER;
 import static net.awyvrix.bot.Util.executeRights;
@@ -26,20 +27,20 @@ public final class Save implements Command {
     }
 
     @Override
-    public CommandType type() {
-        return CommandType.DEVELOPER;
+    public Set<CommandType> types() {
+        return Set.of(CommandType.DEVELOPER);
     }
 
     @Override
-    public void execute(Update update, TelegramClient client) throws TelegramApiException {
-        if (executeRights(client, update)) {
+    public void execute(Update update) throws TelegramApiException {
+        if (executeRights(update, UserTag.DEVELOPER)) {
             try {
                 Main.dataManager.save();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
             LOGGER.info("Forced Save executed\n  |Actor: {}", update.getMessage().getFrom().getUserName());
-            sendMessage(client, update,"✅ Successfully saved");
+            sendMessage(update,"✅ Successfully saved");
         }
     }
 }
