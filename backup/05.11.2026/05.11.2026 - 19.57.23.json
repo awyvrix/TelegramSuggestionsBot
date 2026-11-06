@@ -1,0 +1,35 @@
+{
+  "sent" : [ ],
+  "onMod" : [ ],
+  "published" : [ ],
+  "hashed" : [ ],
+  "users" : {
+    "5615120730" : {
+      "username" : "Copy68",
+      "isAnonymous" : false,
+      "isAdmin" : true,
+      "isDeveloper" : false,
+      "sentContent" : 0,
+      "approvedContent" : 0,
+      "rating" : 0.0,
+      "actions" : 6
+    },
+    "5701688186" : {
+      "username" : "Awyvrix",
+      "isAnonymous" : false,
+      "isAdmin" : false,
+      "isDeveloper" : true,
+      "sentContent" : 0,
+      "approvedContent" : 0,
+      "rating" : 0.0,
+      "actions" : 6
+    }
+  },
+  "queue" : [ ],
+  "nextSubmissionId" : 1,
+  "repeatBlocked" : 0,
+  "spamBlocked" : 0,
+  "sentContent" : 0,
+  "appliedContent" : 0,
+  "approvedContent" : 0
+}

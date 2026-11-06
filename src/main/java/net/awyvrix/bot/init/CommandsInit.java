@@ -4,6 +4,11 @@ import net.awyvrix.bot.Main;
 import net.awyvrix.bot.commands.CommandRegistry;
 import net.awyvrix.bot.commands.custom.*;
 import net.awyvrix.bot.commands.custom.admin.*;
+import net.awyvrix.bot.commands.custom.fun.Gos;
+import net.awyvrix.bot.commands.custom.fun.Number;
+import net.awyvrix.bot.commands.custom.fun.Object;
+import net.awyvrix.bot.commands.custom.fun.LoreReport;
+import net.awyvrix.bot.data.config.ConfigManager;
 
 import static net.awyvrix.bot.Main.LOGGER;
 
@@ -26,6 +31,15 @@ public final class CommandsInit {
         registry.register(new Leaderboard());
 
         registry.register(new MediaProcessor());
+
+        if (ConfigManager.config.FUN_MODE) {
+            // These values are just for rofl and not included in source code
+            LOGGER.warn("Fun mode activated");
+            registry.register(new Gos());
+            registry.register(new Number());
+            registry.register(new Object());
+            registry.register(new LoreReport());
+        }
 
         LOGGER.info("All commands registered");
     }

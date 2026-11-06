@@ -173,8 +173,10 @@ public class Main implements LongPollingSingleThreadUpdateConsumer {
             approvedContent += user.approvedContent;
         }
 
-        BotData.sentContent = appliedContent + approvedContent;
+        BotData.sentContent = appliedContent;
         BotData.appliedContent = appliedContent;
         BotData.approvedContent = approvedContent;
     }
 }
+
+// Make more low-level custom scheduling
