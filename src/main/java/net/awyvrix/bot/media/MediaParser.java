@@ -1,6 +1,5 @@
-package net.awyvrix.bot.init;
+package net.awyvrix.bot.media;
 
-import net.awyvrix.bot.media.Media;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 public final class MediaParser {

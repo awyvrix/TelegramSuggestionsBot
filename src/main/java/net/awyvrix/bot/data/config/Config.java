@@ -4,7 +4,7 @@ public final class Config {
     public boolean TEST_MODE = false;
     public boolean FUN_MODE = true;
 
-    public int BACKUP_PERIOD = 1;
+    public int BACKUP_PERIOD = 3;
 
     public int TEST_NETWORK = 15;
     public int TEST_PUBLICATION_PERIOD = 5;

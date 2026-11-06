@@ -1,11 +1,13 @@
 package net.awyvrix.bot.data.util;
 
+import net.awyvrix.bot.Metadata;
 import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.media.Submission;
 
 import java.util.*;
 
 public final class DataSnapshot {
+    public int SAVE_VERSION = Metadata.SAVE_VERSION;
     public Set<String> sent = new HashSet<>();
     public Set<String> onMod = new HashSet<>();
     public Set<String> published = new HashSet<>();

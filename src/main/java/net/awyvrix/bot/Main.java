@@ -1,28 +1,27 @@
 package net.awyvrix.bot;
 
 import net.awyvrix.bot.commands.CommandRegistry;
-import net.awyvrix.bot.data.*;
-import net.awyvrix.bot.data.backup.BackupDataManager;
-import net.awyvrix.bot.data.backup.BackupScheduler;
+import net.awyvrix.bot.data.BackupDataManager;
+import net.awyvrix.bot.data.BotData;
+import net.awyvrix.bot.data.DataManager;
 import net.awyvrix.bot.data.config.ConfigManager;
 import net.awyvrix.bot.data.config.StaticConfigManager;
 import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.user.UserData;
-import net.awyvrix.bot.data.user.UserUpdateScheduler;
 import net.awyvrix.bot.data.util.DataSnapshot;
 import net.awyvrix.bot.data.util.SetSnapshot;
-import net.awyvrix.bot.debug.DebugScheduler;
 import net.awyvrix.bot.debug.NetworkMonitor;
 import net.awyvrix.bot.init.AdminsInit;
 import net.awyvrix.bot.init.CommandsInit;
 import net.awyvrix.bot.init.DevelopersInit;
-import net.awyvrix.bot.init.MediaParser;
 import net.awyvrix.bot.media.*;
+import net.awyvrix.bot.scheduling.ProcessorThread;
+import net.awyvrix.bot.scheduling.TaskScheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
-import org.telegram.telegrambots.longpolling.util.LongPollingSingleThreadUpdateConsumer;
+import org.telegram.telegrambots.longpolling.util.DefaultLongPollingUpdateConsumer;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -30,33 +29,30 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.io.IOException;
 
-import static net.awyvrix.bot.data.user.UserData.users;
 import static net.awyvrix.bot.data.config.ConfigManager.config;
+import static net.awyvrix.bot.data.user.UserData.users;
 import static net.awyvrix.bot.media.ModerationHandler.NEXT_ID;
-import static net.awyvrix.bot.media.PublicationScheduler.queue;
+import static net.awyvrix.bot.media.Publisher.queue;
 
-public class Main implements LongPollingSingleThreadUpdateConsumer {
+public class Main extends DefaultLongPollingUpdateConsumer {
     public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     public static NetworkMonitor networkMonitor;
     public static boolean MAINTENANCE = false;
 
-    public static final DebugScheduler debugScheduler = new DebugScheduler();
-    public static final PublicationScheduler publicationScheduler = new PublicationScheduler();
-    public static final BackupScheduler backupScheduler = new BackupScheduler();
-    public static final UserUpdateScheduler userUpdateScheduler = new UserUpdateScheduler();
-
+    public static final TaskScheduler taskScheduler = new TaskScheduler();
+    public static final ProcessorThread processorThread = new ProcessorThread(taskScheduler);
     public static final CommandRegistry commandRegistry = new CommandRegistry();
+
     public static final SetSnapshot sentContent = new SetSnapshot();
     public static final SetSnapshot sentHashedContent = new SetSnapshot();
     public static final SetSnapshot onModContent = new SetSnapshot();
     public static final SetSnapshot publishedContent = new SetSnapshot();
 
-    //123
     public static final UserData data = new UserData();
     public static final DataManager dataManager = new DataManager();
     public static final BackupDataManager backupDataManager = new BackupDataManager();
 
-    public final TelegramClient client;
+    public static TelegramClient client;
     public static ModerationService service;
     public static Publisher publisher;
     public static ModerationHandler handler;
@@ -70,51 +66,24 @@ public class Main implements LongPollingSingleThreadUpdateConsumer {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            debugScheduler.stop();
-            publicationScheduler.stop();
-            userUpdateScheduler.stop();
-            backupScheduler.stop();
+            processorThread.shutdown();
         }));
 
         ConfigManager.load();
         CommandsInit.initialise();
+
         client = new OkHttpTelegramClient(token);
-        service = new ModerationService(client, StaticConfigManager.config.MODERATOR);
-        publisher = new Publisher(client, config.TEST_MODE ? StaticConfigManager.config.MODERATOR : StaticConfigManager.config.CHANNEL);
-        handler = new ModerationHandler(client, publisher);
+        service = new ModerationService(StaticConfigManager.config.MODERATOR);
+        publisher = new Publisher(config.TEST_MODE ? StaticConfigManager.config.MODERATOR : StaticConfigManager.config.CHANNEL);
+        handler = new ModerationHandler(publisher);
         networkMonitor = new NetworkMonitor(client);
+        loadData();
 
-        DataSnapshot snapshot = dataManager.load();
-        users.putAll(snapshot.users);
-        queue.addAll(snapshot.queue);
-
-        sentContent.sent().addAll(snapshot.sent);
-        publishedContent.sent().addAll(snapshot.published);
-
-        onModContent.sent().addAll(snapshot.onMod);
-        sentHashedContent.sent().addAll(snapshot.hashed);
-
-        BotData.sentContent = snapshot.sentContent;
-        BotData.appliedContent = snapshot.appliedContent;
-        BotData.approvedContent = snapshot.approvedContent;
-
-        BotData.repeatBlocked = snapshot.repeatBlocked;
-        BotData.spamBlocked = snapshot.spamBlocked;
-        NEXT_ID.set(snapshot.nextSubmissionId);
-        updateData();
-
-        AdminsInit.initialise();
-        DevelopersInit.initialise();
-
-        publicationScheduler.start();
-        userUpdateScheduler.start();
-        debugScheduler.start();
-        backupScheduler.start();
+        processorThread.start();
         LOGGER.info("Bot started");
 
         if (config.TEST_MODE) LOGGER.warn("Bot is launched it Test mode");
         networkMonitor.check(true);
-        dataManager.setLaunched();
     }
 
     @Override
@@ -132,7 +101,7 @@ public class Main implements LongPollingSingleThreadUpdateConsumer {
 
         if (!commandRegistry.commands().containsKey(key)) return;
         try {
-            commandRegistry.commands().get(key).execute(update, client);
+            commandRegistry.commands().get(key).execute(update);
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
         }
@@ -162,6 +131,32 @@ public class Main implements LongPollingSingleThreadUpdateConsumer {
         handler.handle(query);
     }
 
+    private void loadData() throws IOException {
+        DataSnapshot snapshot = dataManager.load();
+        users.putAll(snapshot.users);
+        queue.addAll(snapshot.queue);
+
+        sentContent.sent().addAll(snapshot.sent);
+        publishedContent.sent().addAll(snapshot.published);
+
+        onModContent.sent().addAll(snapshot.onMod);
+        sentHashedContent.sent().addAll(snapshot.hashed);
+
+        BotData.sentContent = snapshot.sentContent;
+        BotData.appliedContent = snapshot.appliedContent;
+        BotData.approvedContent = snapshot.approvedContent;
+
+        BotData.repeatBlocked = snapshot.repeatBlocked;
+        BotData.spamBlocked = snapshot.spamBlocked;
+        NEXT_ID.set(snapshot.nextSubmissionId);
+
+        updateData();
+        AdminsInit.initialise();
+        DevelopersInit.initialise();
+
+        dataManager.setLaunched();
+    }
+
     private void updateData() {
         int appliedContent = 0;
         int approvedContent = 0;
@@ -178,5 +173,3 @@ public class Main implements LongPollingSingleThreadUpdateConsumer {
         BotData.approvedContent = approvedContent;
     }
 }
-
-// Make more low-level custom scheduling

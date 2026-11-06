@@ -1,6 +1,7 @@
 package net.awyvrix.bot.data;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import net.awyvrix.bot.Metadata;
 import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.util.DataSnapshot;
 import net.awyvrix.bot.media.Submission;
@@ -16,7 +17,7 @@ import java.util.Map;
 import static net.awyvrix.bot.Main.*;
 import static net.awyvrix.bot.data.user.UserData.users;
 import static net.awyvrix.bot.media.ModerationHandler.NEXT_ID;
-import static net.awyvrix.bot.media.PublicationScheduler.queue;
+import static net.awyvrix.bot.media.Publisher.queue;
 
 public final class DataManager {
     private static final Path FILE = Path.of("data.json");
@@ -61,7 +62,10 @@ public final class DataManager {
             return new DataSnapshot();
         }
         LOGGER.info("Bot data loaded");
-        return MAPPER.readValue(FILE.toFile(), DataSnapshot.class);
+        DataSnapshot dataSnapshot = MAPPER.readValue(FILE.toFile(), DataSnapshot.class);
+        if (dataSnapshot.SAVE_VERSION != Metadata.SAVE_VERSION)
+            LOGGER.error("Data Version: {} - mismatches current Save Version: {}", dataSnapshot.SAVE_VERSION, Metadata.SAVE_VERSION);
+        return dataSnapshot;
     }
 
     public void setLaunched() {

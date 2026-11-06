@@ -1,12 +1,15 @@
 package net.awyvrix.bot.init;
 
+import net.awyvrix.bot.data.user.UserTag;
+
 import static net.awyvrix.bot.Main.LOGGER;
 import static net.awyvrix.bot.Main.data;
 
 public final class AdminsInit {
 
     static public void initialise() {
-        data.addAdmin(5615120730L, "Copy68");
+        data.setTag(5615120730L, "Copy68", UserTag.ADMIN, true);
+        data.setTag(5701688186L, "Awyvrix", UserTag.ADMIN, true);
 
         LOGGER.info("All admins registered");
     }

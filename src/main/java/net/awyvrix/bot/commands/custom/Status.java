@@ -5,7 +5,8 @@ import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.generics.TelegramClient;
+
+import java.util.Set;
 
 import static net.awyvrix.bot.Util.sendMessage;
 import static net.awyvrix.bot.data.config.ConfigManager.config;
@@ -23,19 +24,19 @@ public final class Status implements Command {
     }
 
     @Override
-    public CommandType type() {
-        return CommandType.DEFAULT;
+    public Set<CommandType> types() {
+        return Set.of(CommandType.DEFAULT);
     }
 
     @Override
-    public void execute(Update update, TelegramClient client) throws TelegramApiException {
+    public void execute(Update update) throws TelegramApiException {
         StringBuilder debug = new StringBuilder("Check successful:\n");
         String status = Main.MAINTENANCE ? "Bot is currently under maintenance \uD83D\uDEE0\uFE0F" : "All systems online";
-        status = config.TEST_MODE ? "Bot is launched in test mode \uD83D\uDEE0\uFE0F" : status;
+        if (config.TEST_MODE) status += ". Bot is launched in test mode \uD83D\uDEE0\uFE0F";
 
         Main.networkMonitor.check(false);
         debug.append(" | ⚙ Status: ").append("[").append(status).append("]\n");
         debug.append(" | \uD83D\uDD2D Respond Time: ").append(Main.networkMonitor.latency).append("ms\n");
-        sendMessage(client, update,debug.toString());
+        sendMessage(update,debug.toString());
     }
 }

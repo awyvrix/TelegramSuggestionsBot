@@ -4,7 +4,8 @@ import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.generics.TelegramClient;
+
+import java.util.Set;
 
 import static net.awyvrix.bot.Util.sendMessage;
 
@@ -21,13 +22,13 @@ public final class Troubleshooting implements Command {
     }
 
     @Override
-    public CommandType type() {
-        return CommandType.DEFAULT;
+    public Set<CommandType> types() {
+        return Set.of(CommandType.DEFAULT);
     }
 
     @Override
-    public void execute(Update update, TelegramClient client) throws TelegramApiException {
-        sendMessage(client, update,"""
+    public void execute(Update update) throws TelegramApiException {
+        sendMessage(update,"""
                 [0] Insufficient rights - Недостаточно прав
                 [м0] \uD83E\uDE97 - Контент уже был в группе
                 [м1] Уже на модерации - Контент уже на модерации

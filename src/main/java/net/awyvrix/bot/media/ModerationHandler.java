@@ -8,24 +8,22 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static net.awyvrix.bot.Main.client;
 import static net.awyvrix.bot.data.config.ConfigManager.config;
 
 public final class ModerationHandler {
     public static final AtomicLong NEXT_ID = new AtomicLong();
     public static final Map<Long, Submission> submissions = new HashMap<>();
 
-    public final TelegramClient client;
     public static Publisher publisher;
 
-    public ModerationHandler(TelegramClient client, Publisher publisher) {
-        this.client = client;
+    public ModerationHandler(Publisher publisher) {
         ModerationHandler.publisher = publisher;
     }
 
