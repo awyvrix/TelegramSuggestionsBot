@@ -14,6 +14,7 @@ import net.awyvrix.bot.debug.NetworkMonitor;
 import net.awyvrix.bot.init.AdminsInit;
 import net.awyvrix.bot.init.CommandsInit;
 import net.awyvrix.bot.init.DevelopersInit;
+import net.awyvrix.bot.init.TaskInit;
 import net.awyvrix.bot.media.*;
 import net.awyvrix.bot.scheduling.ProcessorThread;
 import net.awyvrix.bot.scheduling.TaskScheduler;
@@ -61,12 +62,12 @@ public class Main extends DefaultLongPollingUpdateConsumer {
         LOGGER.info("Starting bot...");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             LOGGER.info("Shutting down...");
+            processorThread.shutdown();
             try {
                 Main.dataManager.save();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            processorThread.shutdown();
         }));
 
         ConfigManager.load();
@@ -153,6 +154,7 @@ public class Main extends DefaultLongPollingUpdateConsumer {
         updateData();
         AdminsInit.initialise();
         DevelopersInit.initialise();
+        TaskInit.initialise();
 
         dataManager.setLaunched();
     }

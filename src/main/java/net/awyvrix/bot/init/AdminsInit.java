@@ -9,7 +9,6 @@ public final class AdminsInit {
 
     static public void initialise() {
         data.setTag(5615120730L, "Copy68", UserTag.ADMIN, true);
-        data.setTag(5701688186L, "Awyvrix", UserTag.ADMIN, true);
 
         LOGGER.info("All admins registered");
     }

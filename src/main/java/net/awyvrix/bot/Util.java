@@ -6,16 +6,19 @@ import net.awyvrix.bot.media.Media;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.List;
 
+import static net.awyvrix.bot.Main.LOGGER;
 import static net.awyvrix.bot.Main.client;
 
 public class Util {
@@ -56,12 +59,20 @@ public class Util {
         }
     }
 
-    public static String getMediaHash(Media media) throws Exception {
-        var file = client.execute(GetFile.builder().fileId(media.fileId()).build());
+    public static String getMediaHash(Media media) {
+        File file;
+        try {
+            file = Main.client.execute(GetFile.builder().fileId(media.fileId()).build());
+        } catch (TelegramApiException e) {
+            LOGGER.error("Could not get file hash: connection timed out");
+            return null;
+        }
         String url = "https://api.telegram.org/file/bot" + StaticConfigManager.config.TOKEN + "/" + file.getFilePath();
 
         try (var in = java.net.URI.create(url).toURL().openStream()) {
             return sha256(in.readAllBytes());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
