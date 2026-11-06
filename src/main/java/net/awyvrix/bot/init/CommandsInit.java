@@ -33,7 +33,7 @@ public final class CommandsInit {
         registry.register(new MediaProcessor());
 
         if (ConfigManager.config.FUN_MODE) {
-            // These values are just for rofl and not included in source code
+            // These commands are just for fun and not included in source code
             LOGGER.warn("Fun mode activated");
             registry.register(new Gos());
             registry.register(new Number());
