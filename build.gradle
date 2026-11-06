@@ -12,7 +12,7 @@ repositories {
 }
 
 shadowJar {
-    archiveFileName = 'bot-2.4-h1.jar'
+    archiveFileName = 'bot-2.4-h2.jar'
 }
 
 dependencies {

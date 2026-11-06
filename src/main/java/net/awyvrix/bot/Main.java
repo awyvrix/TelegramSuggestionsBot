@@ -62,12 +62,12 @@ public class Main extends DefaultLongPollingUpdateConsumer {
         LOGGER.info("Starting bot...");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             LOGGER.info("Shutting down...");
+            processorThread.shutdown();
             try {
                 Main.dataManager.save();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            processorThread.shutdown();
         }));
 
         ConfigManager.load();
