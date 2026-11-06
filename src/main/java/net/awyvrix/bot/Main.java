@@ -14,6 +14,7 @@ import net.awyvrix.bot.debug.NetworkMonitor;
 import net.awyvrix.bot.init.AdminsInit;
 import net.awyvrix.bot.init.CommandsInit;
 import net.awyvrix.bot.init.DevelopersInit;
+import net.awyvrix.bot.init.TaskInit;
 import net.awyvrix.bot.media.*;
 import net.awyvrix.bot.scheduling.ProcessorThread;
 import net.awyvrix.bot.scheduling.TaskScheduler;
@@ -153,6 +154,7 @@ public class Main extends DefaultLongPollingUpdateConsumer {
         updateData();
         AdminsInit.initialise();
         DevelopersInit.initialise();
+        TaskInit.initialise();
 
         dataManager.setLaunched();
     }
