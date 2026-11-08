@@ -64,7 +64,10 @@ public final class Debug implements Command {
                     .append("\n | Downtime: ").append(Main.networkMonitor.downtime).append("ms")
                         .append(" (").append(Main.networkMonitor.downtime/1000).append("s)")
                     .append("\n | LongestDowntime: ").append(Main.networkMonitor.longestDowntime)
-                        .append("ms").append(" (").append(Main.networkMonitor.longestDowntime/1000).append("s)");
+                        .append("ms").append(" (").append(Main.networkMonitor.longestDowntime/1000).append("s)")
+                    .append("\n | NextTask Delta: ").append((Main.taskScheduler.delta()) / 1_000_000)
+                        .append("ms").append(" (").append((Math.round((float) Main.taskScheduler.delta() / 1_000_000_000))).append("s)")
+                    .append("\n | Completed Tasks: ").append((Main.taskScheduler.completed));
 
             sendMessage(update, debug.toString());
         }

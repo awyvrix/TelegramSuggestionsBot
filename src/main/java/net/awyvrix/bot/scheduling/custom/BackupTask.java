@@ -14,12 +14,12 @@ public class BackupTask implements ScheduledTask {
 
     @Override
     public String id() {
-        return "debugger";
+        return "backup";
     }
 
     @Override
     public Duration duration() {
-        return new Duration(TimeUnit.SECONDS, period);
+        return new Duration(TimeUnit.HOURS, period);
     }
 
     @Override

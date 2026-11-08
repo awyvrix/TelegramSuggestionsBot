@@ -14,7 +14,7 @@ public class UpdateUserTask implements ScheduledTask {
 
     @Override
     public String id() {
-        return "debugger";
+        return "update_user";
     }
 
     @Override

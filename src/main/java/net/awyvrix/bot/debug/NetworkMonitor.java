@@ -19,11 +19,11 @@ public final class NetworkMonitor {
     public volatile int hashFailures;
 
     public volatile long downtime;
-    public volatile long longestDowntime = 0;
+    public volatile long longestDowntime;
 
-    private long downStart;
-    private LocalDateTime downStartTime;
-    public List<NetworkReport> networkReports = new ArrayList<>();
+    private volatile long downStart;
+    private volatile LocalDateTime downStartTime;
+    public volatile List<NetworkReport> networkReports = new ArrayList<>();
 
     public NetworkMonitor(TelegramClient client) {
         this.client = client;
