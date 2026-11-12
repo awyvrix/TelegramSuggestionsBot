@@ -25,7 +25,7 @@ public class BackupTask implements ScheduledTask {
     @Override
     public void execute() {
         try {
-            Main.backupDataManager.backup();
+            Main.backupDataManager.backup("persistent");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

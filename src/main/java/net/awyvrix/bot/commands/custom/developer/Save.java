@@ -33,7 +33,7 @@ public final class Save implements Command {
 
     @Override
     public void execute(Update update) throws TelegramApiException {
-        if (executeRights(update, UserTag.DEVELOPER)) {
+        if (executeRights(update, UserTag.DEVELOPER, UserTag.ADMIN)) {
             try {
                 Main.dataManager.save();
             } catch (IOException e) {

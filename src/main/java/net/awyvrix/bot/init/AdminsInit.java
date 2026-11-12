@@ -6,8 +6,7 @@ import static net.awyvrix.bot.Main.LOGGER;
 import static net.awyvrix.bot.Main.data;
 
 public final class AdminsInit {
-
-    static public void initialise() {
+    public static void initialise() {
         data.setTag(5615120730L, "Copy68", UserTag.ADMIN, true);
 
         LOGGER.info("All admins registered");

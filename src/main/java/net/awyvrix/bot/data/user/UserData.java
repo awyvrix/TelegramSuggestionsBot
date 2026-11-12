@@ -1,5 +1,7 @@
 package net.awyvrix.bot.data.user;
 
+import net.awyvrix.bot.data.BotState;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -7,8 +9,9 @@ public final class UserData {
     public static Map<Long, User> users = new ConcurrentHashMap<>();
 
     public static User getOrCreate(long id, String author) {
-        if (!users.containsKey(id)) users.put(id, new User(author));
-        return users.get(id);
+        synchronized (BotState.LOCK) {
+            return users.computeIfAbsent(id, ignored -> new User(author));
+        }
     }
 
     public static User get(long id) {

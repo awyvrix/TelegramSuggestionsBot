@@ -16,7 +16,7 @@ import static net.awyvrix.bot.Main.LOGGER;
 public final class CommandsInit {
     private static final CommandRegistry registry = Main.commandRegistry;
 
-    static public void initialise() {
+    public static void initialise() {
         registry.register(new Start());
         registry.register(new Status());
         registry.register(new Troubleshooting());
@@ -43,7 +43,6 @@ public final class CommandsInit {
             registry.register(new LoreReport());
         }
 
-        registry.setInitialised();
         LOGGER.info("All commands registered");
     }
 }
