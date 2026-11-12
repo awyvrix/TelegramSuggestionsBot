@@ -2,11 +2,13 @@ package net.awyvrix.bot.commands.custom.developer;
 
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
+import net.awyvrix.bot.data.config.ConfigManager;
 import net.awyvrix.bot.data.user.UserTag;
 import net.awyvrix.bot.debug.NetworkReport;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.List;
 import java.util.Set;
 
 import static net.awyvrix.bot.Main.networkMonitor;
@@ -33,9 +35,14 @@ public final class Report implements Command {
     @Override
     public void execute(Update update) throws TelegramApiException {
         if (executeRights(update, UserTag.DEVELOPER)) {
-            StringBuilder debug = new StringBuilder("Report:\n" + " | TotalErrors: " + networkMonitor.networkReports.size() + "\n | \n");
-            for (int i = 0; i < networkMonitor.networkReports.size(); i++) {
-                debug.append(format(networkMonitor.networkReports.get(i) , i));
+            List<NetworkReport> networkReports = networkMonitor.networkReports;
+            int count = networkReports.size();
+            int c = 0;
+
+            StringBuilder debug = new StringBuilder("Report:\n" + " | TotalErrors: " + count + "\n | \n");
+            for (int i = count-1; i >= 0; i--) {
+                debug.append(format(networkReports.get(i) , count-i));
+                if (++c >= ConfigManager.config.MAX_NETWORK_REPORTS) break;
             }
             sendMessage(update, debug.toString());
         }

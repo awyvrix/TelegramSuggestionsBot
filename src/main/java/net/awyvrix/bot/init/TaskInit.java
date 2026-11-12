@@ -12,7 +12,7 @@ import static net.awyvrix.bot.Main.LOGGER;
 public final class TaskInit {
     private static final TaskScheduler registry = Main.taskScheduler;
 
-    static public void initialise() {
+    public static void initialise() {
         registry.register(new BackupTask());
         registry.register(new DebugTask());
         registry.register(new PublisherTask());

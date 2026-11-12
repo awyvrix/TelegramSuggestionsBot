@@ -29,7 +29,7 @@ public final class NetworkMonitor {
         this.client = client;
     }
 
-    public void check(boolean log) {
+    public boolean check(boolean log) {
         long start = System.nanoTime();
         try {
             client.execute(new GetMe());
@@ -41,12 +41,16 @@ public final class NetworkMonitor {
             if (latency > 10000) LOGGER.error("Telegram API Respond longer 10 000ms");
             if (downStart != 0) downtimeUpdate();
             failures = 0;
+            return true;
         } catch (Exception e) {
-            if (downStart == 0) downStart = System.currentTimeMillis();
-            if (downStart == 0) downStartTime = LocalDateTime.now();
+            if (downStart == 0) {
+                downStart = System.currentTimeMillis();
+                downStartTime = LocalDateTime.now();
+            }
             failures++;
             totalFailures++;
             LOGGER.error("Telegram API failure #{}: {}", failures, e.toString());
+            return false;
         }
     }
 

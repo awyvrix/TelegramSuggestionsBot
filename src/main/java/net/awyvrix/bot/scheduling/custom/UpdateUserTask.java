@@ -1,5 +1,6 @@
 package net.awyvrix.bot.scheduling.custom;
 
+import net.awyvrix.bot.data.BotState;
 import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.scheduling.Duration;
@@ -24,10 +25,13 @@ public class UpdateUserTask implements ScheduledTask {
 
     @Override
     public void execute() {
-        for (User user : UserData.users.values()) {
-            int max = (int) (Math.floor(user.rating) + config.BASIC_ACTIONS);
-            int maxRecovery = (1 + (int) (Math.floor(user.rating) / config.ACTIONS_DELTA));
-            if (user.actions < Math.min(max, config.MAX_ACTIONS)) user.actions += Math.min(maxRecovery, config.MAX_RECOVERY);
+        synchronized (BotState.LOCK) {
+            for (User user : UserData.users.values()) {
+                int level = (int) (Math.floor(user.rating) / config.ACTIONS_DELTA);
+                int recovery = Math.min(config.MAX_RECOVERY, config.BASIC_RECOVERY + level);
+                int maxActions = Math.min(config.MAX_ACTIONS, config.BASIC_ACTIONS + level);
+                user.actions = Math.min(maxActions, user.actions + recovery);
+            }
         }
     }
 }

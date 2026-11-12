@@ -1,6 +1,10 @@
 package net.awyvrix.bot;
 
 import net.awyvrix.bot.commands.CommandRegistry;
+import net.awyvrix.bot.console.ConsoleCommandManager;
+import net.awyvrix.bot.console.ConsoleManager;
+import net.awyvrix.bot.console.custom.HelpCommand;
+import net.awyvrix.bot.console.custom.StopCommand;
 import net.awyvrix.bot.data.BackupDataManager;
 import net.awyvrix.bot.data.BotData;
 import net.awyvrix.bot.data.DataManager;
@@ -11,10 +15,7 @@ import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.util.DataSnapshot;
 import net.awyvrix.bot.data.util.SetSnapshot;
 import net.awyvrix.bot.debug.NetworkMonitor;
-import net.awyvrix.bot.init.AdminsInit;
-import net.awyvrix.bot.init.CommandsInit;
-import net.awyvrix.bot.init.DevelopersInit;
-import net.awyvrix.bot.init.TaskInit;
+import net.awyvrix.bot.init.*;
 import net.awyvrix.bot.media.*;
 import net.awyvrix.bot.scheduling.ProcessorThread;
 import net.awyvrix.bot.scheduling.TaskScheduler;
@@ -33,6 +34,7 @@ import java.io.IOException;
 import static net.awyvrix.bot.data.config.ConfigManager.config;
 import static net.awyvrix.bot.data.user.UserData.users;
 import static net.awyvrix.bot.media.ModerationHandler.NEXT_ID;
+import static net.awyvrix.bot.media.ModerationHandler.submissions;
 import static net.awyvrix.bot.media.Publisher.queue;
 
 public class Main extends DefaultLongPollingUpdateConsumer {
@@ -43,6 +45,7 @@ public class Main extends DefaultLongPollingUpdateConsumer {
     public static final TaskScheduler taskScheduler = new TaskScheduler();
     public static final ProcessorThread processorThread = new ProcessorThread(taskScheduler);
     public static final CommandRegistry commandRegistry = new CommandRegistry();
+    private final ConsoleCommandManager commandManager = new ConsoleCommandManager();
 
     public static final SetSnapshot sentContent = new SetSnapshot();
     public static final SetSnapshot sentHashedContent = new SetSnapshot();
@@ -59,12 +62,13 @@ public class Main extends DefaultLongPollingUpdateConsumer {
     public static ModerationHandler handler;
 
     public Main(String token) throws IOException {
-        LOGGER.info("Starting bot...");
+        LOGGER.info("Starting bot... [{}]", StaticConfigManager.config.NAME);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             LOGGER.info("Shutting down...");
             processorThread.shutdown();
             try {
                 Main.dataManager.save();
+                Main.backupDataManager.backup("shutdown");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -85,6 +89,9 @@ public class Main extends DefaultLongPollingUpdateConsumer {
 
         if (config.TEST_MODE) LOGGER.warn("Bot is launched it Test mode");
         networkMonitor.check(true);
+
+        ConsoleCommandsInit.initialise(commandManager);
+        new ConsoleManager(commandManager).start();
     }
 
     @Override
@@ -136,6 +143,7 @@ public class Main extends DefaultLongPollingUpdateConsumer {
         DataSnapshot snapshot = dataManager.load();
         users.putAll(snapshot.users);
         queue.addAll(snapshot.queue);
+        submissions.putAll(snapshot.submissions);
 
         sentContent.sent().addAll(snapshot.sent);
         publishedContent.sent().addAll(snapshot.published);

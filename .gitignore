@@ -5,7 +5,7 @@ build/
 !**/src/test/**/build/
 .kotlin
 src/main/java/net/awyvrix/bot/commands/custom/fun/
-data.json
+data23.json
 bot.json
 config.json
 

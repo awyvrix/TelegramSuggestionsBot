@@ -5,6 +5,7 @@ import net.awyvrix.bot.Util;
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.BotData;
+import net.awyvrix.bot.data.BotState;
 import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.user.UserTag;
 import net.awyvrix.bot.media.Media;
@@ -42,29 +43,36 @@ public final class MediaProcessor implements Command {
 
     @Override
     public void execute(Update update) throws TelegramApiException {
+        synchronized (BotState.LOCK) {
+            process(update);
+        }
+    }
+
+    private void process(Update update) throws TelegramApiException  {
+        if (update == null || !update.hasMessage()) return;
         Message message = update.getMessage();
+
+        if (message.getFrom() == null) return;
         String author = message.getFrom().getUserName();
         long authorId = message.getFrom().getId();
+        long chatId = message.getChatId();
         int messageId = message.getMessageId();
         Media media = MediaParser.parse(update);
 
-        if (media == null) return;
+        if (media == null) {
+            Util.replyEmoji(chatId, messageId, "\uD83D\uDC4E");
+            return;
+        }
         BotData.sentContent++;
         User user = getOrCreate(authorId, author);
         boolean anon = Main.data.getTag(authorId, author, UserTag.ANONYMOUS);
-        Submission submission = new Submission(authorId, messageId, author, anon, false, media);
+        Submission submission = new Submission(authorId, message.getChatId(), messageId, author, anon, Boolean.TRUE.equals(message.getHasMediaSpoiler()), media);
         user.updateUsername(author);
 
-        String hash = null;
-        try {
-            hash = getMediaHash(media);
-        } catch (Exception e) {
-            LOGGER.error("Cannot get file hash", e);
-            networkMonitor.hashFailures++;
-        }
+        String hash = getMediaHash(media);
 
         if (Math.floor(user.rating) + config.BASIC_ACTIONS <= 0) {
-            Util.replyEmoji(authorId, messageId, "\uD83D\uDC4E");
+            Util.replyEmoji(chatId, messageId, "\uD83D\uDC4E");
             Util.sendMessage(update, "❌ Вы были перманентно забанены за свои деяния [м2]");
             return;
 
@@ -74,42 +82,42 @@ public final class MediaProcessor implements Command {
         } if (user.actions <= 0) {
             BotData.spamBlocked++;
             user.rating -= config.SPAM_FINE;
-            Util.replyEmoji(authorId, messageId, "\uD83D\uDC4E");
+            Util.replyEmoji(chatId, messageId, "\uD83D\uDC4E");
             Util.sendMessage(update, "❌ Контент не был отправлен: Слишком частые запросы [м2]");
             return;
 
         } if (sentContent.contains(media.uniqueId()) || sentHashedContent.contains(hash)) {
             BotData.repeatBlocked++;
             user.rating -= config.REPEAT_FINE;
-            Util.replyEmoji(authorId, messageId, "\uD83D\uDC4E");
+            Util.replyEmoji(chatId, messageId, "\uD83D\uDC4E");
             Util.sendMessage(update, "❌ Контент не был отправлен: \uD83E\uDE97 [м0]");
             return;
 
         } if (onModContent.contains(media.uniqueId())) {
             BotData.spamBlocked++;
             user.rating -= config.MOD_SPAM_FINE;
-            Util.replyEmoji(authorId, messageId, "\uD83D\uDC4E");
+            Util.replyEmoji(chatId, messageId, "\uD83D\uDC4E");
             Util.sendMessage(update, "❌ Контент не был отправлен: Уже на модерации [м1]");
             return;
 
         } if (Main.data.getTag(authorId, author, UserTag.ADMIN)) {
             Main.submit(submission, false);
-            Util.replyEmoji(authorId, messageId, "\uD83D\uDC4D");
+            Util.replyEmoji(chatId, messageId, "\uD83D\uDC4D");
             Util.sendMessage(update, "⚙\uFE0F Контент принудительно отправлен");
             user.addSent();
 
         } else {
-            BotData.appliedContent++;
             long submissionId = NEXT_ID.incrementAndGet();
-            submissions.put(submissionId, submission);
-
             Main.sendToModeration(media, submissionId);
+
             onModContent.addToSent(media.uniqueId());
-            sentHashedContent.addToSent(hash);
+            submissions.put(submissionId, submission);
+            BotData.appliedContent++;
+            if (hash != null) sentHashedContent.addToSent(hash);
 
             user.addSent();
             user.actions--;
-            Util.replyEmoji(authorId, messageId, "\uD83D\uDC40");
+            Util.replyEmoji(chatId, messageId, "\uD83D\uDC40");
             Util.sendMessage(update, "\uD83D\uDCE5 Контент отправлен на модерацию");
         }
     }

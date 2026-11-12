@@ -18,8 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.List;
 
-import static net.awyvrix.bot.Main.LOGGER;
-import static net.awyvrix.bot.Main.client;
+import static net.awyvrix.bot.Main.*;
 
 public class Util {
     public static boolean executeRights(Update update, UserTag... tags) throws TelegramApiException {
@@ -37,6 +36,14 @@ public class Util {
 
     public static boolean checkRights(Update update, UserTag... tags) {
         User user = update.getMessage().getFrom();
+        for (UserTag tag : tags) {
+            if (Main.data.getTag(user.getId(), user.getUserName(), tag)) return true;
+        }
+
+        return false;
+    }
+
+    public static boolean checkRights(User user, UserTag... tags) {
         for (UserTag tag : tags) {
             if (Main.data.getTag(user.getId(), user.getUserName(), tag)) return true;
         }
@@ -72,7 +79,9 @@ public class Util {
         try (var in = java.net.URI.create(url).toURL().openStream()) {
             return sha256(in.readAllBytes());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.error("Cannot get file hash");
+            networkMonitor.hashFailures++;
+            throw new RuntimeException();
         }
     }
 

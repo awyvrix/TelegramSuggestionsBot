@@ -33,13 +33,14 @@ public final class Backup implements Command {
 
     @Override
     public void execute(Update update) throws TelegramApiException {
-        if (executeRights(update, UserTag.DEVELOPER)) {
+        if (executeRights(update, UserTag.DEVELOPER, UserTag.ADMIN)) {
+            String nickname = update.getMessage().getFrom().getUserName();
             try {
-                Main.backupDataManager.backup();
+                Main.backupDataManager.backup("forced-" + nickname);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            LOGGER.info("Forced Backup executed\n  |Actor: {}", update.getMessage().getFrom().getUserName());
+            LOGGER.info("Forced Backup executed\n  |Actor: {}", nickname);
             sendMessage(update,"✅ Backup successfully completed");
         }
     }

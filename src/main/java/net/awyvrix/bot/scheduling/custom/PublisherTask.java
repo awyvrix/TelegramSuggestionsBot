@@ -4,7 +4,6 @@ import net.awyvrix.bot.Main;
 import net.awyvrix.bot.media.Submission;
 import net.awyvrix.bot.scheduling.Duration;
 import net.awyvrix.bot.scheduling.ScheduledTask;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -36,7 +35,7 @@ public class PublisherTask implements ScheduledTask {
         try {
             Main.publisher.publish();
             Main.dataManager.save();
-        } catch (IOException | TelegramApiException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

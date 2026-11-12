@@ -17,7 +17,11 @@ public final class ProcessorThread extends Thread {
     @Override
     public void run() {
         while (running && !isInterrupted()) {
-            taskScheduler.tick();
+            try {
+                taskScheduler.tick();
+            } catch (RuntimeException e) {
+                LOGGER.error("Task caused an exception: {}", String.valueOf(e));
+            }
 
             long delta = taskScheduler.delta();
             if (delta == Long.MAX_VALUE) {
