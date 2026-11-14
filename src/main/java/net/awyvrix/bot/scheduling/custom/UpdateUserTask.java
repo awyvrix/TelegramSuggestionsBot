@@ -34,7 +34,7 @@ public class UpdateUserTask implements ScheduledTask {
                 int level = (int) (Math.floor(user.rating()) / config.ACTIONS_DELTA);
                 int recovery = Math.min(config.MAX_RECOVERY, config.BASIC_RECOVERY + level);
                 int maxActions = Math.min(config.MAX_ACTIONS, config.BASIC_ACTIONS + level);
-                user.increaseActions(Math.min(maxActions, user.actions() + recovery));
+                user.setActions(Math.min(maxActions, user.actions() + recovery));
             }
         }
     }

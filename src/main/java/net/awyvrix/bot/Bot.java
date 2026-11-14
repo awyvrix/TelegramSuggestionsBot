@@ -37,7 +37,8 @@ public class Bot {
 
     private final ConsoleManager consoleManager;
 
-    public Bot(String token) {
+    public Bot(String token) throws IOException {
+        ConfigManager.load();
         this.context = new BotContext();
 
         this.client = new OkHttpTelegramClient(token);
@@ -55,6 +56,11 @@ public class Bot {
             LOGGER.info("Shutting down...");
             processorThread.shutdown();
             try {
+                processorThread.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            try {
                 context.botDataManager().save();
                 context.botDataManager().backup("shutdown");
             } catch (IOException e) {
@@ -66,7 +72,6 @@ public class Bot {
     public void start() throws IOException {
         LOGGER.info("Starting bot... [{}]", StaticConfigManager.config.NAME);
 
-        ConfigManager.load();
         CommandsInit.initialise(client, context, context.commandManager(), context.botDataManager(),
                 taskScheduler, networkMonitor, moderationService, publisher);
 
