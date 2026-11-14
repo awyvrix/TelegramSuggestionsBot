@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import java.util.HashSet;
 import java.util.Set;
 
+import static net.awyvrix.bot.data.config.ConfigManager.config;
+
 @JsonAutoDetect(
         fieldVisibility = JsonAutoDetect.Visibility.ANY,
         getterVisibility = JsonAutoDetect.Visibility.NONE,
@@ -18,7 +20,7 @@ public final class User {
     private int approvedContentCount = 0;
 
     private float rating = 0;
-    private int actions;
+    private int actions = config.BASIC_ACTIONS;
 
     public User() {}
 
@@ -70,27 +72,31 @@ public final class User {
         rating += val;
     }
 
-    public int actions() {
+    public synchronized int actions() {
         return actions;
     }
 
-    public void increaseActions(int val) {
+    public synchronized void increaseActions(int val) {
         actions += val;
     }
 
-    public float rating() {
+    public synchronized void setActions(int val) {
+        actions = val;
+    }
+
+    public synchronized float rating() {
         return rating;
     }
 
-    public int submittedMediaCount() {
+    public synchronized int submittedMediaCount() {
         return submittedMediaCount;
     }
 
-    public int approvedContentCount() {
+    public synchronized int approvedContentCount() {
         return approvedContentCount;
     }
 
-    public String username() {
+    public synchronized String username() {
         return username;
     }
 }

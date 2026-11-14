@@ -79,7 +79,7 @@ public final class MediaProcessor implements Command {
         Submission submission = new Submission(authorId, message.getChatId(), messageId, author, anon, Boolean.TRUE.equals(message.getHasMediaSpoiler()), media);
         user.updateUsername(author);
 
-        String hash = getMediaHash(client, monitor, media);
+        String hash = getMediaHash(client, update, monitor, media);
 
         if (Math.floor(user.rating()) + config.BASIC_ACTIONS <= 0) {
             Util.replyEmoji(client, chatId, messageId, "\uD83D\uDC4E");
@@ -114,6 +114,8 @@ public final class MediaProcessor implements Command {
             publisher.submit(submission, submission.isSpoiler());
             Util.replyEmoji(client, chatId, messageId, "\uD83D\uDC4D");
             Util.sendMessage(client, update, "⚙️ Контент принудительно отправлен");
+
+            if (hash != null) data.sentHashedContent().addToSent(hash);
             user.addSent();
 
         } else {

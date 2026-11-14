@@ -18,7 +18,11 @@ public class Main extends DefaultLongPollingUpdateConsumer {
     private final Bot bot;
 
     public Main(String token) {
-        this.bot = new Bot(token);
+        try {
+            this.bot = new Bot(token);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         try {
             bot.start();
         } catch (IOException e) {

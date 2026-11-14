@@ -69,11 +69,12 @@ public class Util {
         }
     }
 
-    public static String getMediaHash(TelegramClient client, NetworkMonitor networkMonitor, Media media) {
+    public static String getMediaHash(TelegramClient client, Update update, NetworkMonitor networkMonitor, Media media) {
         File file;
         try {
             file = client.execute(GetFile.builder().fileId(media.fileId()).build());
         } catch (TelegramApiException e) {
+            networkMonitor.hashFailures++;
             LOGGER.error("Could not get file hash: connection timed out");
             return null;
         }
@@ -83,7 +84,12 @@ public class Util {
             return sha256(in.readAllBytes());
         } catch (IOException e) {
             LOGGER.error("Cannot get file hash");
-            networkMonitor.hashFailures++;
+            try {
+                sendMessage(client, update, "❌ Не удалось обработать контент. Попробуйте позже");
+                Util.replyEmoji(client, update.getMessage().getChatId(), update.getMessage().getMessageId(), "⚠");
+            } catch (TelegramApiException ex) {
+                throw new RuntimeException(ex);
+            }
             throw new RuntimeException();
         }
     }

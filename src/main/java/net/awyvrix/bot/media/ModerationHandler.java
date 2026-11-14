@@ -35,7 +35,7 @@ public final class ModerationHandler {
     public void handle(Update update) throws TelegramApiException {
         CallbackQuery query = update.getCallbackQuery();
 
-        if (!Util.checkRights(update, data.users(), UserTag.ADMIN)) return;
+        if (!Util.checkRights(query.getFrom(), data.users(), UserTag.ADMIN)) return;
         String[] data = query.getData().split(":", 2);
 
         if (data.length != 2) return;
