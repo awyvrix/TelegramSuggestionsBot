@@ -2,6 +2,7 @@ package net.awyvrix.bot.data;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import net.awyvrix.bot.Metadata;
 import net.awyvrix.bot.data.util.DataSnapshot;
@@ -49,7 +50,7 @@ public final class SaveManager {
             ((ObjectNode) root).put("saveVersion", version);
             LOGGER.info("Migrated save data: {} -> {}", version - 1, version);
         }
-
+        System.out.println(root);
         DataSnapshot snapshot = MAPPER.treeToValue(root, DataSnapshot.class);
         snapshot.normalize();
         return snapshot;
@@ -79,20 +80,28 @@ public final class SaveManager {
                 // Added new fields
             }
             case 2 -> {
-                ObjectNode users = (ObjectNode) target.get("users");
-                if (users != null) {
-                    users.properties().forEach(entry -> {
-                        if (entry.getValue() instanceof ObjectNode user) migrateUser(user);
+                JsonNode users = target.get("users");
+                if (users instanceof ObjectNode object) {
+                    object.elements().forEachRemaining(user -> {
+                        if (user instanceof ObjectNode u) migrateUser(u);
                     });
                 }
 
-                ObjectNode submissions = (ObjectNode) target.get("submissions");
-                if (submissions != null) {
-                    submissions.properties().forEach(entry -> {
-                        if (entry.getValue() instanceof ObjectNode submission) migrateSubmission(submission);
+                JsonNode submissions = target.get("submissions");
+                if (submissions instanceof ObjectNode object) {
+                    object.elements().forEachRemaining(submission -> {
+                        if (submission instanceof ObjectNode s) migrateSubmission(s);
                     });
                 }
-                target.set("receivedMediaCount", target.remove("sentContent"));
+
+                JsonNode queue = target.get("queue");
+                if (queue instanceof ArrayNode array) {
+                    for (JsonNode entry : array) {
+                        if (entry instanceof ObjectNode q) migrateSubmission(q);
+                    }
+                }
+
+                renameField(target, "sentContent", "receivedMediaCount");
             }
             default -> throw new IOException("No migration registered from save version " + fromVersion);
         }
@@ -115,6 +124,7 @@ public final class SaveManager {
     }
 
     private static void migrateSubmission(ObjectNode target) {
+        System.out.println("migrate" + target);
         renameField(target, "chatId", "sourceChatId");
         renameField(target, "messageId", "sourceMessageId");
         renameField(target, "authorName", "authorDisplayName");
@@ -123,9 +133,8 @@ public final class SaveManager {
     }
 
     private static void renameField(ObjectNode target, String oldName, String newName) {
-        JsonNode oldValue = target.remove(oldName);
-        if (oldValue != null && !target.has(newName)) {
-            target.set(newName, oldValue);
+        if (!target.has(newName) && target.has(oldName)) {
+            target.set(newName, target.remove(oldName));
         }
     }
 }
