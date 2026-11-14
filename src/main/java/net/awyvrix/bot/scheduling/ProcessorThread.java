@@ -3,7 +3,6 @@ package net.awyvrix.bot.scheduling;
 import java.util.concurrent.locks.LockSupport;
 
 import static net.awyvrix.bot.Main.LOGGER;
-import static net.awyvrix.bot.Main.processorThread;
 
 public final class ProcessorThread extends Thread {
     private volatile boolean running = false;

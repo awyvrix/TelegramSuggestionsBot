@@ -2,16 +2,23 @@ package net.awyvrix.bot.commands.custom;
 
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
-import net.awyvrix.bot.data.user.UserData;
+import net.awyvrix.bot.data.DataManager;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.Set;
 
 import static net.awyvrix.bot.Util.sendMessage;
-import static net.awyvrix.bot.data.BotData.*;
 
 public final class Statistics implements Command {
+    private final DataManager data;
+    private final TelegramClient client;
+
+    public Statistics(DataManager data, TelegramClient client) {
+        this.data = data;
+        this.client = client;
+    }
 
     @Override
     public String id() {
@@ -30,14 +37,14 @@ public final class Statistics implements Command {
 
     @Override
     public void execute(Update update) throws TelegramApiException {
-        sendMessage(update,"Статистика:\n" +
-                " | Отправлено контента: " + sentContent + "\n" +
-                " | Отправлено на модерацию: " + appliedContent + "\n" +
-                " | Одобрено контента: " + approvedContent + "\n" +
+        sendMessage(client, update,"Статистика:\n" +
+                " | Отправлено контента: " + data.receivedMediaCount() + "\n" +
+                " | Отправлено на модерацию: " + data.appliedContent() + "\n" +
+                " | Одобрено контента: " + data.approvedContent() + "\n" +
                 " |\n" +
-                " | Заблокировано спама: " + spamBlocked + "\n" +
-                " | Заблокировано баянов: " + repeatBlocked + "\n" +
+                " | Заблокировано спама: " + data.spamBlocked() + "\n" +
+                " | Заблокировано баянов: " + data.repeatBlocked() + "\n" +
                 " |\n" +
-                " | Уникальных пользователей: " + UserData.users.size() + "\n");
+                " | Уникальных пользователей: " + data.users().users().size() + "\n");
     }
 }

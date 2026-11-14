@@ -1,107 +1,180 @@
 package net.awyvrix.bot.data;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import net.awyvrix.bot.Metadata;
 import net.awyvrix.bot.data.user.User;
+import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.util.DataSnapshot;
-import net.awyvrix.bot.media.ModerationHandler;
+import net.awyvrix.bot.data.util.SetSnapshot;
+import net.awyvrix.bot.init.AdminsInit;
+import net.awyvrix.bot.init.DevelopersInit;
 import net.awyvrix.bot.media.Submission;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import static net.awyvrix.bot.Main.*;
-import static net.awyvrix.bot.data.user.UserData.users;
+import static net.awyvrix.bot.Main.LOGGER;
 import static net.awyvrix.bot.media.ModerationHandler.NEXT_ID;
-import static net.awyvrix.bot.media.ModerationHandler.submissions;
 import static net.awyvrix.bot.media.Publisher.queue;
 
 public final class DataManager {
-    private static final Path FILE = Path.of("data.json");
-    private static final Path TEMP_FILE = Path.of("data.json.tmp");
-    private final ObjectMapper MAPPER = new ObjectMapper();
-    private volatile boolean launched;
+    private final SaveManager saveManager;
+    private final UserData users = new UserData();
+    private final Map<Long, Submission> submissions = new ConcurrentHashMap<>();
 
-    public synchronized void save() throws IOException {
-        if (!launched) return;
-        DataSnapshot snapshot = createSnapshot();
-        MAPPER.writerWithDefaultPrettyPrinter().writeValue(TEMP_FILE.toFile(), snapshot);
-        try {
-            Files.move(TEMP_FILE, FILE, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
-        } catch (java.nio.file.AtomicMoveNotSupportedException ignored) {
-            Files.move(TEMP_FILE, FILE, StandardCopyOption.REPLACE_EXISTING);
+    private int receivedMediaCount = 0; // sentContent
+    private int appliedContent = 0; // appliedContent
+    private int approvedContent = 0; // approvedContent
+    private int repeatBlocked = 0; // repeatBlocked
+    private int spamBlocked = 0; // spamBlocked
+
+    private final SetSnapshot sentContent = new SetSnapshot(); // sentContent
+    private final SetSnapshot sentHashedContent = new SetSnapshot(); // sentHashedContent
+    private final SetSnapshot onModContent = new SetSnapshot(); // onModContent
+    private final SetSnapshot publishedContent = new SetSnapshot(); // publishedContent
+
+    public DataManager(SaveManager saveManager) {
+        this.saveManager = saveManager;
+    }
+
+    private void loadData() throws IOException {
+        DataSnapshot snapshot = saveManager.load();
+        users.users().putAll(snapshot.users);
+        queue.addAll(snapshot.queue);
+        submissions.putAll(snapshot.submissions);
+
+        sentContent.sent().addAll(snapshot.sent);
+        publishedContent.sent().addAll(snapshot.published);
+
+        onModContent.sent().addAll(snapshot.onMod);
+        sentHashedContent.sent().addAll(snapshot.hashed);
+
+        receivedMediaCount = snapshot.receivedMediaCount;
+        appliedContent = snapshot.appliedContent;
+        approvedContent = snapshot.approvedContent;
+        repeatBlocked = snapshot.repeatBlocked;
+        spamBlocked = snapshot.spamBlocked;
+
+        NEXT_ID.set(snapshot.nextSubmissionId);
+
+        updateData();
+        AdminsInit.initialise(users);
+        DevelopersInit.initialise(users);
+        saveManager.setLaunched();
+    }
+
+    private void updateData() {
+        int applied = 0;
+        int approved = 0;
+
+        if (receivedMediaCount != 0 || users.users().isEmpty()) return;
+        LOGGER.info("Recovering Data...");
+        for (User user : users.users().values()) {
+            applied += user.submittedMediaCount();
+            approved += user.approvedContentCount();
         }
+
+        receivedMediaCount = applied;
+        appliedContent = applied;
+        approvedContent = approved;
     }
 
-    public DataSnapshot load() throws IOException {
-        if (!Files.exists(FILE) || Files.size(FILE) == 0) {
-            LOGGER.info("Bot data not found or empty - Creating new");
-            return new DataSnapshot();
-        }
-        JsonNode root = MAPPER.readTree(FILE.toFile());
-        int version = root.path("SAVE_VERSION").asInt(0);
-
-        if (version > Metadata.SAVE_VERSION) throw new IOException("Save format " + version + " is newer than supported format " + Metadata.SAVE_VERSION);
-        while (version < Metadata.SAVE_VERSION) {
-            root = migrate(root, version);
-            version++;
-            ((ObjectNode) root).put("SAVE_VERSION", version);
-            LOGGER.info("Migrated save data: {} -> {}", version - 1, version);
-        }
-        DataSnapshot snapshot = MAPPER.treeToValue(root, DataSnapshot.class);
-        snapshot.normalize();
-        return snapshot;
+    public void backup(String type) throws IOException {
+        saveManager.backup(createSnapshot(), type);
     }
 
-    public void setLaunched() {
-        launched = true;
+    public void save() throws IOException {
+        saveManager.save(createSnapshot());
     }
 
-    public boolean isLaunched() {
-        return launched;
+    public void load() throws IOException {
+        loadData();
     }
 
-    private JsonNode migrate(JsonNode source, int fromVersion) throws IOException {
-        ObjectNode target = source.isObject() ? ((ObjectNode) source).deepCopy() : MAPPER.createObjectNode();
-
-        switch (fromVersion) {
-            case 0 -> {
-                target.put("SAVE_VERSION", 1);
-            }
-            case 1 -> {
-
-            }
-            default -> throw new IOException("No migration registered from save version " + fromVersion);
-        }
-
-        return target;
-    }
-
-    public static DataSnapshot createSnapshot() {
+    private DataSnapshot createSnapshot() {
         synchronized (BotState.LOCK) {
             DataSnapshot snapshot = new DataSnapshot();
-            users.forEach((id, user) -> snapshot.users.put(id, user.copy()));
+            users.users().forEach((id, user) -> snapshot.users.put(id, user.copy()));
             snapshot.queue.addAll(queue);
-            snapshot.submissions.putAll(submissions);
+            snapshot.submissions.putAll(submissions());
             snapshot.sent.addAll(sentContent.copy());
             snapshot.published.addAll(publishedContent.copy());
             snapshot.onMod.addAll(onModContent.copy());
             snapshot.hashed.addAll(sentHashedContent.copy());
-            snapshot.sentContent = BotData.sentContent;
-            snapshot.appliedContent = BotData.appliedContent;
-            snapshot.approvedContent = BotData.approvedContent;
-            snapshot.repeatBlocked = BotData.repeatBlocked;
-            snapshot.spamBlocked = BotData.spamBlocked;
+            snapshot.receivedMediaCount = receivedMediaCount;
+            snapshot.appliedContent = appliedContent;
+            snapshot.approvedContent = approvedContent;
+            snapshot.repeatBlocked = repeatBlocked;
+            snapshot.spamBlocked = spamBlocked;
             snapshot.nextSubmissionId = NEXT_ID.get();
             return snapshot;
         }
+    }
+
+    public SetSnapshot sentContent() {
+        return sentContent;
+    }
+
+    public SetSnapshot sentHashedContent() {
+        return sentHashedContent;
+    }
+
+    public SetSnapshot onModContent() {
+        return onModContent;
+    }
+
+    public SetSnapshot publishedContent() {
+        return publishedContent;
+    }
+
+    public Map<Long, Submission> submissions() {
+        return submissions;
+    }
+
+    public int receivedMediaCount() {
+        return receivedMediaCount;
+    }
+
+    public int appliedContent() {
+        return appliedContent;
+    }
+
+    public int approvedContent() {
+        return approvedContent;
+    }
+
+    public int repeatBlocked() {
+        return repeatBlocked;
+    }
+
+    public int spamBlocked() {
+        return spamBlocked;
+    }
+
+    public void increaseReceivedMedia() {
+        receivedMediaCount++;
+    }
+
+    public void increaseAppliedContent() {
+        appliedContent++;
+    }
+
+    public void increaseApprovedContent() {
+        approvedContent++;
+    }
+
+    public void increaseRepeatBlocked() {
+        repeatBlocked++;
+    }
+
+    public void increaseSpamBlocked() {
+        spamBlocked++;
+    }
+
+    public UserData users() {
+        return users;
+    }
+
+    public int userCount() {
+        return users.users().size();
     }
 }

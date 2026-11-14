@@ -3,19 +3,30 @@ package net.awyvrix.bot.commands.custom.developer;
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.config.ConfigManager;
+import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.user.UserTag;
+import net.awyvrix.bot.debug.NetworkMonitor;
 import net.awyvrix.bot.debug.NetworkReport;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.List;
 import java.util.Set;
 
-import static net.awyvrix.bot.Main.networkMonitor;
 import static net.awyvrix.bot.Util.executeRights;
 import static net.awyvrix.bot.Util.sendMessage;
 
 public final class Report implements Command {
+    private final TelegramClient client;
+    private final NetworkMonitor monitor;
+    private final UserData data;
+
+    public Report(NetworkMonitor monitor, UserData data, TelegramClient client) {
+        this.client = client;
+        this.monitor = monitor;
+        this.data = data;
+    }
 
     @Override
     public String id() {
@@ -34,8 +45,8 @@ public final class Report implements Command {
 
     @Override
     public void execute(Update update) throws TelegramApiException {
-        if (executeRights(update, UserTag.DEVELOPER)) {
-            List<NetworkReport> networkReports = networkMonitor.networkReports;
+        if (executeRights(client, data, update, UserTag.DEVELOPER)) {
+            List<NetworkReport> networkReports = monitor.networkReports;
             int count = networkReports.size();
             int c = 0;
 
@@ -44,7 +55,7 @@ public final class Report implements Command {
                 debug.append(format(networkReports.get(i) , count-i));
                 if (++c >= ConfigManager.config.MAX_NETWORK_REPORTS) break;
             }
-            sendMessage(update, debug.toString());
+            sendMessage(client, update, debug.toString());
         }
     }
 

@@ -8,14 +8,16 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMa
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
-import static net.awyvrix.bot.Main.client;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 public final class ModerationService {
     private final long moderationChatId;
 
-    public ModerationService(long moderationChatId) {
+    private final TelegramClient client;
+
+    public ModerationService(TelegramClient client, long moderationChatId) {
         this.moderationChatId = moderationChatId;
+        this.client = client;
     }
 
     public void send(Media media, long submissionId) throws TelegramApiException {

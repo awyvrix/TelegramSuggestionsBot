@@ -6,15 +6,15 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public final class UserData {
-    public static Map<Long, User> users = new ConcurrentHashMap<>();
+    private final Map<Long, User> users = new ConcurrentHashMap<>();
 
-    public static User getOrCreate(long id, String author) {
+    public User getOrCreate(long id, String author) {
         synchronized (BotState.LOCK) {
             return users.computeIfAbsent(id, ignored -> new User(author));
         }
     }
 
-    public static User get(long id) {
+    public User get(long id) {
         if (!users.containsKey(id)) return null;
         return users.get(id);
     }
@@ -29,5 +29,9 @@ public final class UserData {
 
     public void setTag(long id, String username, UserTag tag, boolean isPresent) {
         getOrCreate(id, username).setTag(tag, isPresent);
+    }
+
+    public Map<Long, User> users() {
+        return users;
     }
 }

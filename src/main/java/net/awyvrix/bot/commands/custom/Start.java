@@ -1,12 +1,15 @@
 package net.awyvrix.bot.commands.custom;
 
-import net.awyvrix.bot.Main;
 import net.awyvrix.bot.commands.Command;
+import net.awyvrix.bot.commands.CommandManager;
 import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.config.StaticConfigManager;
+import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.user.UserTag;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
+
 import java.util.Map;
 import java.util.Set;
 
@@ -19,6 +22,16 @@ public final class Start implements Command {
     private StringBuilder adminList = null;
     private StringBuilder developerList = null;
     private boolean built = false;
+
+    private final CommandManager commandManager;
+    private final UserData data;
+    private final TelegramClient client;
+
+    public Start(CommandManager commandManager, UserData data, TelegramClient client) {
+        this.commandManager = commandManager;
+        this.data = data;
+        this.client = client;
+    }
 
     @Override
     public String id() {
@@ -41,9 +54,9 @@ public final class Start implements Command {
         StringBuilder developerList = new StringBuilder();
         StringBuilder adminList = new StringBuilder();
 
-        if (checkRights(update, UserTag.DEVELOPER)) developerList = this.developerList;
-        if (checkRights(update, UserTag.ADMIN)) adminList = this.adminList;
-        sendMessage(update,"Это бот-предложка " + StaticConfigManager.config.NAME + " [" + StaticConfigManager.config.TAG + "]\n " +
+        if (checkRights(update, data, UserTag.DEVELOPER)) developerList = this.developerList;
+        if (checkRights(update, data, UserTag.ADMIN)) adminList = this.adminList;
+        sendMessage(client, update,"Это бот-предложка " + StaticConfigManager.config.NAME + " [" + StaticConfigManager.config.TAG + "]\n " +
                         commandList +
                         adminList +
                         developerList +
@@ -53,7 +66,7 @@ public final class Start implements Command {
     }
 
     public void build() {
-        Map<String, Command> registry = Main.commandRegistry.commands();
+        Map<String, Command> registry = commandManager.commands();
         commandList = new StringBuilder("Список команд:\n");
         attachmentsList = new StringBuilder("\n Список дополнений:\n");
         developerList = new StringBuilder("\n Команды разработчиков:\n");

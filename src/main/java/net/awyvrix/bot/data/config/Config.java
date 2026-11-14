@@ -19,6 +19,7 @@ public final class Config {
     public int MAX_VIDEO_SIZE = 60;
     public int MAX_DOCUMENT_SIZE = 20;
 
+    public boolean KEEP_SUBMISSIONS = true;
     public int PUBLICATION_PERIOD = 1800;
     public int USER_PERIOD = 600;
 

@@ -1,7 +1,6 @@
 package net.awyvrix.bot.console.custom;
 
 import net.awyvrix.bot.console.ConsoleCommand;
-import net.awyvrix.bot.console.ConsoleCommandManager;
 
 import static net.awyvrix.bot.Main.LOGGER;
 

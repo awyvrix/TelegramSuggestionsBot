@@ -2,37 +2,40 @@ package net.awyvrix.bot.media;
 
 import net.awyvrix.bot.Util;
 import net.awyvrix.bot.data.BotState;
+import net.awyvrix.bot.data.DataManager;
 import net.awyvrix.bot.data.user.User;
-import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.user.UserTag;
-import org.telegram.telegrambots.meta.api.methods.AnswerCallbackQuery;
 import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static net.awyvrix.bot.Main.client;
 import static net.awyvrix.bot.data.config.ConfigManager.config;
 
 public final class ModerationHandler {
     public static final AtomicLong NEXT_ID = new AtomicLong();
-    public static final Map<Long, Submission> submissions = new ConcurrentHashMap<>();
 
+    private final DataManager data;
     private final Publisher publisher;
+    private final TelegramClient client;
 
-    public ModerationHandler(Publisher publisher) {
+    public ModerationHandler(DataManager botDataManager, Publisher publisher, TelegramClient client) {
+        this.data = botDataManager;
         this.publisher = publisher;
+        this.client = client;
     }
 
-    public void handle(CallbackQuery query) throws TelegramApiException {
-        if (!Util.checkRights(query.getFrom(), UserTag.ADMIN)) return;
+    public void handle(Update update) throws TelegramApiException {
+        CallbackQuery query = update.getCallbackQuery();
+
+        if (!Util.checkRights(update, data.users(), UserTag.ADMIN)) return;
         String[] data = query.getData().split(":", 2);
 
         if (data.length != 2) return;
@@ -47,17 +50,19 @@ public final class ModerationHandler {
 
     private void reject(CallbackQuery query, long submissionId) throws TelegramApiException {
         synchronized (BotState.LOCK) {
+            Map<Long, Submission> submissions = data.submissions();
             Submission submission = submissions.get(submissionId);
             deleteModerationMessage(query);
             submissions.remove(submissionId);
 
             if (submission == null) return;
-            replyStatus(submission.chatId(), submission.messageId(), "\uD83D\uDC4E");
+            replyStatus(submission.sourceChatId(), submission.sourceMessageId(), "\uD83D\uDC4E");
         }
     }
 
     private void approve(CallbackQuery query, long submissionId, boolean spoiler) throws TelegramApiException {
         synchronized (BotState.LOCK) {
+            Map<Long, Submission> submissions = data.submissions();
             Submission submission = submissions.get(submissionId);
 
             if (submission == null) return;
@@ -66,14 +71,16 @@ public final class ModerationHandler {
             deleteModerationMessage(query);
             submissions.remove(submissionId);
 
-            replyStatus(submission.chatId(), submission.messageId(), "\uD83D\uDC4D");
-            User user = UserData.get(submission.authorId());
+            replyStatus(submission.sourceChatId(), submission.sourceMessageId(), "\uD83D\uDC4D");
+            User user = data.users().get(submission.authorId());
 
-            if (user != null) user.rating += config.ACCEPT_BONUS;
+            if (user != null) user.increaseRating(config.ACCEPT_BONUS);
         }
     }
 
     private void deleteModerationMessage(CallbackQuery query) throws TelegramApiException {
+        if (!config.KEEP_SUBMISSIONS) return;
+        if (query.getMessage() == null) return;
         client.execute(DeleteMessage.builder()
                 .chatId(query.getMessage().getChatId())
                 .messageId(query.getMessage().getMessageId())

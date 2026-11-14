@@ -1,7 +1,5 @@
 package net.awyvrix.bot.init;
 
-import net.awyvrix.bot.commands.custom.*;
-import net.awyvrix.bot.commands.custom.developer.*;
 import net.awyvrix.bot.console.ConsoleCommandManager;
 import net.awyvrix.bot.console.custom.HelpCommand;
 import net.awyvrix.bot.console.custom.ReloadConfigCommand;
