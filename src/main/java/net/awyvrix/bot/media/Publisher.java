@@ -1,36 +1,39 @@
 package net.awyvrix.bot.media;
 
-import net.awyvrix.bot.Main;
-import net.awyvrix.bot.data.BotData;
 import net.awyvrix.bot.data.BotState;
+import net.awyvrix.bot.data.DataManager;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.methods.send.SendVideo;
-import org.telegram.telegrambots.meta.api.objects.File;
 import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import static net.awyvrix.bot.Main.*;
-import static net.awyvrix.bot.data.user.UserData.getOrCreate;
+import static net.awyvrix.bot.Main.LOGGER;
 
 public final class Publisher {
     public static final Queue<Submission> queue = new ConcurrentLinkedQueue<>();
     private final long channelId;
 
-    public Publisher(long channelId) {
+    private final TelegramClient client;
+    private final DataManager data;
+
+    public Publisher(TelegramClient client, long channelId, DataManager data) {
         this.channelId = channelId;
+        this.client = client;
+        this.data = data;
     }
 
     public void submit(Submission submission, boolean spoiler) {
         synchronized (BotState.LOCK) {
-            getOrCreate(submission.authorId(), submission.authorName()).addApproved();
-            BotData.approvedContent++;
-            sentContent.addToSent(submission.media().uniqueId());
+            data.users().getOrCreate(submission.authorId(), submission.authorDisplayName()).addApproved();
+            data.increaseApprovedContent();
+            data.sentContent().addToSent(submission.media().uniqueId());
             queue.add(submission.setSpoiler(spoiler));
         }
     }
@@ -39,18 +42,18 @@ public final class Publisher {
         Submission submission = queue.peek();
 
         if (submission == null) return;
-        if (publishedContent.contains(submission.media().uniqueId())) {
+        if (data.publishedContent().contains(submission.media().uniqueId())) {
             synchronized (BotState.LOCK) {
                 queue.poll();
             }
             return;
         }
-        boolean spoiler = submission.spoiler();
+        boolean spoiler = submission.isSpoiler();
         Media media = submission.media();
 
         GetFile request = new GetFile(media.fileId());
         try {
-            Main.client.execute(request);
+            client.execute(request);
         } catch (TelegramApiRequestException e) {
             if (e.getErrorCode() == 400) {
                 discard(submission, e.getApiResponse());
@@ -85,7 +88,7 @@ public final class Publisher {
             }
             synchronized (BotState.LOCK) {
                 queue.poll();
-                publishedContent.addToSent(submission.media().uniqueId());
+                data.publishedContent().addToSent(submission.media().uniqueId());
             }
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
@@ -93,7 +96,7 @@ public final class Publisher {
     }
 
     private String createCaption(Submission submission) {
-        return "By " + (submission.anonymous() ? " \uD83E\uDEE5 Anonymous" : (" \uD83D\uDC7E" + submission.authorName()));
+        return "By " + (submission.isAnonymous() ? " \uD83E\uDEE5 Anonymous" : (" \uD83D\uDC7E" + submission.authorDisplayName()));
     }
 
     private void discard(Submission submission, String reason) {

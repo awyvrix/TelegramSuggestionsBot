@@ -1,17 +1,24 @@
 package net.awyvrix.bot.data.user;
 
-import net.awyvrix.bot.data.config.ConfigManager;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@JsonAutoDetect(
+        fieldVisibility = JsonAutoDetect.Visibility.ANY,
+        getterVisibility = JsonAutoDetect.Visibility.NONE,
+        isGetterVisibility = JsonAutoDetect.Visibility.NONE,
+        setterVisibility = JsonAutoDetect.Visibility.NONE
+)
 public final class User {
-    public String username = "[unspecified]";
-    public Set<UserTag> userTags = new HashSet<>();
-    public int sentContent = 0;
-    public int approvedContent = 0;
-    public float rating = 0;
-    public int actions = ConfigManager.config.BASIC_ACTIONS;
+    private String username;
+    private final Set<UserTag> tags = new HashSet<>();
+    private int submittedMediaCount = 0;
+    private int approvedContentCount = 0;
+
+    private float rating = 0;
+    private int actions;
 
     public User() {}
 
@@ -22,27 +29,27 @@ public final class User {
 
     public synchronized User copy() {
         User copy = new User(username);
-        copy.userTags.addAll(userTags);
-        copy.sentContent = sentContent;
-        copy.approvedContent = approvedContent;
+        copy.tags.addAll(tags);
+        copy.submittedMediaCount = submittedMediaCount;
+        copy.approvedContentCount = approvedContentCount;
         copy.rating = rating;
         copy.actions = actions;
         return copy;
     }
 
     public synchronized boolean switchTag(UserTag tag) {
-        if (userTags.contains(tag)) userTags.remove(tag);
-        else userTags.add(tag);
-        return userTags.contains(tag);
+        if (tags.contains(tag)) tags.remove(tag);
+        else tags.add(tag);
+        return tags.contains(tag);
     }
 
     public synchronized boolean getTag(UserTag tag) {
-        return userTags.contains(tag);
+        return tags.contains(tag);
     }
 
     public synchronized void setTag(UserTag tag, boolean isPresent) {
-        if (isPresent) userTags.add(tag);
-        else userTags.remove(tag);
+        if (isPresent) tags.add(tag);
+        else tags.remove(tag);
     }
 
     public synchronized void updateUsername(String name) {
@@ -51,11 +58,39 @@ public final class User {
         if (!username.equals(name)) username = name;
     }
 
-    public synchronized void addApproved() {
-        approvedContent++;
+    public synchronized void addSent() {
+        submittedMediaCount++;
     }
 
-    public synchronized void addSent() {
-        sentContent++;
+    public synchronized void addApproved() {
+        approvedContentCount++;
+    }
+
+    public synchronized void increaseRating(float val) {
+        rating += val;
+    }
+
+    public int actions() {
+        return actions;
+    }
+
+    public void increaseActions(int val) {
+        actions += val;
+    }
+
+    public float rating() {
+        return rating;
+    }
+
+    public int submittedMediaCount() {
+        return submittedMediaCount;
+    }
+
+    public int approvedContentCount() {
+        return approvedContentCount;
+    }
+
+    public String username() {
+        return username;
     }
 }

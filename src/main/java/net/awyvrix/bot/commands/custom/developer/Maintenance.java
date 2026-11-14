@@ -2,9 +2,11 @@ package net.awyvrix.bot.commands.custom.developer;
 
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
+import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.user.UserTag;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.Set;
 
@@ -14,6 +16,13 @@ import static net.awyvrix.bot.Util.executeRights;
 import static net.awyvrix.bot.Util.sendMessage;
 
 public final class Maintenance implements Command {
+    private final UserData data;
+    private final TelegramClient client;
+
+    public Maintenance(UserData data, TelegramClient client) {
+        this.data = data;
+        this.client = client;
+    }
 
     @Override
     public String id() {
@@ -32,10 +41,10 @@ public final class Maintenance implements Command {
 
     @Override
     public void execute(Update update) throws TelegramApiException {
-        if (executeRights(update, UserTag.DEVELOPER, UserTag.ADMIN)) {
+        if (executeRights(client, data, update, UserTag.DEVELOPER, UserTag.ADMIN)) {
             MAINTENANCE = !MAINTENANCE;
             LOGGER.warn("Maintenance mode: {}\n  |Actor: {}", MAINTENANCE, update.getMessage().getFrom().getUserName());
-            sendMessage(update, "\uD83D\uDEE0\uFE0F Maintenance mode: " + (MAINTENANCE ? "Enabled" : "Disabled"));
+            sendMessage(client, update, "\uD83D\uDEE0\uFE0F Maintenance mode: " + (MAINTENANCE ? "Enabled" : "Disabled"));
         }
     }
 }

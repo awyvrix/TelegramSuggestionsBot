@@ -1,11 +1,14 @@
 package net.awyvrix.bot.commands.custom.developer;
 
-import net.awyvrix.bot.Main;
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
+import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.user.UserTag;
+import net.awyvrix.bot.debug.NetworkMonitor;
+import net.awyvrix.bot.scheduling.TaskScheduler;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
@@ -19,6 +22,17 @@ import static net.awyvrix.bot.Util.sendMessage;
 import static net.awyvrix.bot.media.Publisher.queue;
 
 public final class Debug implements Command {
+    private final TaskScheduler taskScheduler;
+    private final NetworkMonitor networkMonitor;
+    private final UserData data;
+    private final TelegramClient client;
+
+    public Debug(TaskScheduler taskScheduler, NetworkMonitor networkMonitor, UserData data, TelegramClient client) {
+        this.taskScheduler = taskScheduler;
+        this.networkMonitor = networkMonitor;
+        this.client = client;
+        this.data = data;
+    }
 
     @Override
     public String id() {
@@ -37,7 +51,7 @@ public final class Debug implements Command {
 
     @Override
     public void execute(Update update) throws TelegramApiException {
-        if (executeRights(update, UserTag.DEVELOPER)) {
+        if (executeRights(client, data, update, UserTag.DEVELOPER)) {
             StringBuilder debug = new StringBuilder("Debug:\n" + " | Version: " + VERSION + "\n" + " | Save Version: " + SAVE_VERSION + "\n");
             RuntimeMXBean runtimeBean = ManagementFactory.getRuntimeMXBean();
 
@@ -46,7 +60,7 @@ public final class Debug implements Command {
             long hours = TimeUnit.MILLISECONDS.toHours(uptimeMs) % 24;
             long minutes = TimeUnit.MILLISECONDS.toMinutes(uptimeMs) % 60;
             long seconds = TimeUnit.MILLISECONDS.toSeconds(uptimeMs) % 60;
-            Main.networkMonitor.check(true);
+            networkMonitor.check(true);
 
             debug.append(" | Uptime: ")
                     .append(days).append("d ")
@@ -57,19 +71,19 @@ public final class Debug implements Command {
                     .append(" | Queue: ").append(queue.size())
 
                     .append("\n---\nNetwork:")
-                    .append("\n | LastSuccess: ").append(Main.networkMonitor.lastSuccess / 1_000_000)
-                    .append("\n | Failures: ").append(Main.networkMonitor.totalFailures)
-                    .append("\n | Hash Failures: ").append(Main.networkMonitor.hashFailures)
-                    .append("\n | Latency: ").append(Main.networkMonitor.latency).append("ms")
-                    .append("\n | Downtime: ").append(Main.networkMonitor.downtime).append("ms")
-                        .append(" (").append(Main.networkMonitor.downtime/1000).append("s)")
-                    .append("\n | LongestDowntime: ").append(Main.networkMonitor.longestDowntime)
-                        .append("ms").append(" (").append(Main.networkMonitor.longestDowntime/1000).append("s)")
-                    .append("\n | NextTask Delta: ").append((Main.taskScheduler.delta()) / 1_000_000)
-                        .append("ms").append(" (").append((Math.round((float) Main.taskScheduler.delta() / 1_000_000_000))).append("s)")
-                    .append("\n | Completed Tasks: ").append((Main.taskScheduler.completed));
+                    .append("\n | LastSuccess: ").append(networkMonitor.lastSuccess / 1_000_000)
+                    .append("\n | Failures: ").append(networkMonitor.totalFailures)
+                    .append("\n | Hash Failures: ").append(networkMonitor.hashFailures)
+                    .append("\n | Latency: ").append(networkMonitor.latency).append("ms")
+                    .append("\n | Downtime: ").append(networkMonitor.downtime).append("ms")
+                        .append(" (").append(networkMonitor.downtime/1000).append("s)")
+                    .append("\n | LongestDowntime: ").append(networkMonitor.longestDowntime)
+                        .append("ms").append(" (").append(networkMonitor.longestDowntime/1000).append("s)")
+                    .append("\n | NextTask Delta: ").append((taskScheduler.delta()) / 1_000_000)
+                        .append("ms").append(" (").append((Math.round((float) taskScheduler.delta() / 1_000_000_000))).append("s)")
+                    .append("\n | Completed Tasks: ").append((taskScheduler.completed()));
 
-            sendMessage(update, debug.toString());
+            sendMessage(client, update, debug.toString());
         }
     }
 }

@@ -7,7 +7,7 @@ import net.awyvrix.bot.media.Submission;
 import java.util.*;
 
 public final class DataSnapshot {
-    public int SAVE_VERSION = Metadata.SAVE_VERSION;
+    public int SaveVersion = Metadata.SAVE_VERSION;
     public Set<String> sent = new HashSet<>();
     public Set<String> onMod = new HashSet<>();
     public Set<String> published = new HashSet<>();
@@ -20,7 +20,7 @@ public final class DataSnapshot {
     public int repeatBlocked = 0;
     public int spamBlocked = 0;
 
-    public int sentContent = 0;
+    public int receivedMediaCount = 0;
     public int appliedContent = 0;
     public int approvedContent = 0;
 

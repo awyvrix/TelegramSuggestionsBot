@@ -2,14 +2,14 @@ package net.awyvrix.bot.media;
 
 public record Submission(
         long authorId,
-        long chatId,
-        int messageId,
-        String authorName,
-        boolean anonymous,
-        boolean spoiler,
+        long sourceChatId,
+        int sourceMessageId,
+        String authorDisplayName,
+        boolean isAnonymous,
+        boolean isSpoiler,
         Media media
 ) {
     public Submission setSpoiler(boolean spoiler) {
-        return new Submission(authorId, chatId, messageId, authorName, anonymous, spoiler, media);
+        return new Submission(authorId, sourceChatId, sourceMessageId, authorDisplayName, isAnonymous, spoiler, media);
     }
 }

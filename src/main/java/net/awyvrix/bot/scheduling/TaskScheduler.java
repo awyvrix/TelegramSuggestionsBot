@@ -1,10 +1,7 @@
 package net.awyvrix.bot.scheduling;
 
-import net.awyvrix.bot.Main;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static net.awyvrix.bot.Main.LOGGER;
 
@@ -13,7 +10,7 @@ public class TaskScheduler {
     private long delta = 15_000_000_000L;
     private boolean initialised = false;
 
-    public volatile int completed = 0;
+    private volatile int completed = 0;
 
     public void register(ScheduledTask task) {
         if (task.id() == null || task.id().isBlank()) throw new IllegalStateException("ID cannot be null or blank: " + task.getClass());
@@ -50,5 +47,9 @@ public class TaskScheduler {
 
     public void setInitialised() {
         initialised = true;
+    }
+
+    public int completed() {
+        return completed;
     }
 }
