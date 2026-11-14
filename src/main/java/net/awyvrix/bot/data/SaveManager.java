@@ -85,6 +85,13 @@ public final class SaveManager {
                         if (entry.getValue() instanceof ObjectNode user) migrateUser(user);
                     });
                 }
+
+                ObjectNode submissions = (ObjectNode) target.get("submissions");
+                if (submissions != null) {
+                    submissions.properties().forEach(entry -> {
+                        if (entry.getValue() instanceof ObjectNode submission) migrateSubmission(submission);
+                    });
+                }
                 target.set("receivedMediaCount", target.remove("sentContent"));
             }
             default -> throw new IOException("No migration registered from save version " + fromVersion);
@@ -105,6 +112,14 @@ public final class SaveManager {
         renameField(target, "userTags", "tags");
         renameField(target, "sentContent", "submittedMediaCount");
         renameField(target, "approvedContent", "approvedContentCount");
+    }
+
+    private static void migrateSubmission(ObjectNode target) {
+        renameField(target, "chatId", "sourceChatId");
+        renameField(target, "messageId", "sourceMessageId");
+        renameField(target, "authorName", "authorDisplayName");
+        renameField(target, "anonymous", "isAnonymous");
+        renameField(target, "spoiler", "isSpoiler");
     }
 
     private static void renameField(ObjectNode target, String oldName, String newName) {
