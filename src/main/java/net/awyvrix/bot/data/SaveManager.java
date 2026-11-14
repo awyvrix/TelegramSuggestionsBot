@@ -40,13 +40,13 @@ public final class SaveManager {
             return new DataSnapshot();
         }
         JsonNode root = MAPPER.readTree(FILE.toFile());
-        int version = root.path("SaveVersion").asInt(0);
+        int version = root.path("saveVersion").asInt(0);
 
         if (version > Metadata.SAVE_VERSION) throw new IOException("Save format " + version + " is newer than supported format " + Metadata.SAVE_VERSION);
         while (version < Metadata.SAVE_VERSION) {
             root = migrate(root, version);
             version++;
-            ((ObjectNode) root).put("SaveVersion", version);
+            ((ObjectNode) root).put("saveVersion", version);
             LOGGER.info("Migrated save data: {} -> {}", version - 1, version);
         }
 
@@ -73,7 +73,7 @@ public final class SaveManager {
 
         switch (fromVersion) {
             case 0 -> {
-                target.put("SAVE_VERSION", 1);
+                target.put("saveVersion", 1);
             }
             case 1 -> {
                 // Added new fields

@@ -7,7 +7,7 @@ import net.awyvrix.bot.media.Submission;
 import java.util.*;
 
 public final class DataSnapshot {
-    public int SaveVersion = Metadata.SAVE_VERSION;
+    public int saveVersion = Metadata.SAVE_VERSION;
     public Set<String> sent = new HashSet<>();
     public Set<String> onMod = new HashSet<>();
     public Set<String> published = new HashSet<>();
