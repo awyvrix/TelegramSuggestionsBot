@@ -1,16 +1,7 @@
 package net.awyvrix.bot.translation;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import net.awyvrix.bot.data.config.Config;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-
-import static net.awyvrix.bot.Main.LOGGER;
 
 public final class TranslationManager {
     private static final Map<String, Map<String, String>> LANGUAGES = new ConcurrentHashMap<>();
