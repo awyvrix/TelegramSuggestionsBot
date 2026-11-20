@@ -2,9 +2,8 @@ package net.awyvrix.bot.data.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import net.awyvrix.bot.exceptions.ErrorHandler;
+import net.awyvrix.bot.debug.ErrorHandler;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 

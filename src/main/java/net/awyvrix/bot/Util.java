@@ -3,8 +3,8 @@ package net.awyvrix.bot;
 import net.awyvrix.bot.data.config.StaticConfigManager;
 import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.user.UserTag;
+import net.awyvrix.bot.debug.ErrorHandler;
 import net.awyvrix.bot.debug.NetworkMonitor;
-import net.awyvrix.bot.exceptions.ErrorHandler;
 import net.awyvrix.bot.media.Media;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
@@ -16,13 +16,10 @@ import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.List;
-
-import static net.awyvrix.bot.Main.LOGGER;
 
 public class Util {
     public static boolean executeRights(TelegramClient client, UserData data, Update update, UserTag... tags) {

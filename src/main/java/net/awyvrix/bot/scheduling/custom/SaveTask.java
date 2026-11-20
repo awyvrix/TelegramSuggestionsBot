@@ -4,7 +4,6 @@ import net.awyvrix.bot.data.DataManager;
 import net.awyvrix.bot.scheduling.Duration;
 import net.awyvrix.bot.scheduling.ScheduledTask;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public final class SaveTask implements ScheduledTask {

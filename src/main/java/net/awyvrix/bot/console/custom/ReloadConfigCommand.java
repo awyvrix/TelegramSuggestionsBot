@@ -3,8 +3,6 @@ package net.awyvrix.bot.console.custom;
 import net.awyvrix.bot.console.ConsoleCommand;
 import net.awyvrix.bot.data.config.ConfigManager;
 
-import java.io.IOException;
-
 import static net.awyvrix.bot.Main.LOGGER;
 
 public class ReloadConfigCommand implements ConsoleCommand {

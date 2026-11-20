@@ -4,12 +4,10 @@ import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.DataManager;
 import net.awyvrix.bot.data.user.UserTag;
-import net.awyvrix.bot.exceptions.ErrorHandler;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-import java.io.IOException;
 import java.util.Set;
 
 import static net.awyvrix.bot.Main.LOGGER;

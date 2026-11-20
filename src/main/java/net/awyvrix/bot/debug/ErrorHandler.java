@@ -1,4 +1,4 @@
-package net.awyvrix.bot.exceptions;
+package net.awyvrix.bot.debug;
 
 import static net.awyvrix.bot.Main.LOGGER;
 

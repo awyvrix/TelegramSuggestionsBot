@@ -1,6 +1,5 @@
 package net.awyvrix.bot.debug;
 
-import net.awyvrix.bot.exceptions.ErrorHandler;
 import org.telegram.telegrambots.meta.api.methods.GetMe;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 

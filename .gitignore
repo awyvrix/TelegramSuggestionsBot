@@ -51,7 +51,7 @@ bin/
 /logs/
 /backup/
 
-/src/main/java/net/awyvrix/bot/translation/
-/src/main/java/net/awyvrix/bot/commands/custom/Lang.java
-/src/main/TelegramSuggestionsBot_audit.md
-/src/main/TelegramSuggestionsBot_audit_v2.md
+src/main/java/net/awyvrix/bot/translation/
+src/main/java/net/awyvrix/bot/commands/custom/Lang.java
+src/main/TelegramSuggestionsBot_audit.md
+src/main/TelegramSuggestionsBot_audit_v2.md
