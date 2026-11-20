@@ -4,17 +4,14 @@ import net.awyvrix.bot.commands.Argument;
 import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandManager;
 import net.awyvrix.bot.data.config.StaticConfigManager;
-import net.awyvrix.bot.exceptions.ErrorHandler;
+import net.awyvrix.bot.debug.ErrorHandler;
 import net.awyvrix.bot.media.MediaParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.longpolling.TelegramBotsLongPollingApplication;
 import org.telegram.telegrambots.longpolling.util.DefaultLongPollingUpdateConsumer;
 import org.telegram.telegrambots.meta.api.objects.Update;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;

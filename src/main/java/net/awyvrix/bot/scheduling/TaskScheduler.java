@@ -1,6 +1,6 @@
 package net.awyvrix.bot.scheduling;
 
-import net.awyvrix.bot.exceptions.ErrorHandler;
+import net.awyvrix.bot.debug.ErrorHandler;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,7 +2,7 @@ package net.awyvrix.bot.media;
 
 import net.awyvrix.bot.data.BotState;
 import net.awyvrix.bot.data.DataManager;
-import net.awyvrix.bot.exceptions.ErrorHandler;
+import net.awyvrix.bot.debug.ErrorHandler;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -12,8 +12,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiRequestException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import static net.awyvrix.bot.Main.LOGGER;

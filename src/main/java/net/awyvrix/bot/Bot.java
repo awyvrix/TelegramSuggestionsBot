@@ -7,8 +7,8 @@ import net.awyvrix.bot.data.DataManager;
 import net.awyvrix.bot.data.SaveManager;
 import net.awyvrix.bot.data.config.ConfigManager;
 import net.awyvrix.bot.data.config.StaticConfigManager;
+import net.awyvrix.bot.debug.ErrorHandler;
 import net.awyvrix.bot.debug.NetworkMonitor;
-import net.awyvrix.bot.exceptions.ErrorHandler;
 import net.awyvrix.bot.init.CommandsInit;
 import net.awyvrix.bot.init.ConsoleCommandsInit;
 import net.awyvrix.bot.init.TaskInit;
@@ -19,8 +19,6 @@ import net.awyvrix.bot.scheduling.ProcessorThread;
 import net.awyvrix.bot.scheduling.TaskScheduler;
 import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
-
-import java.io.IOException;
 
 import static net.awyvrix.bot.Main.LOGGER;
 import static net.awyvrix.bot.data.config.ConfigManager.config;

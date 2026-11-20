@@ -4,12 +4,11 @@ import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.util.DataSnapshot;
 import net.awyvrix.bot.data.util.SetSnapshot;
-import net.awyvrix.bot.exceptions.ErrorHandler;
+import net.awyvrix.bot.debug.ErrorHandler;
 import net.awyvrix.bot.init.AdminsInit;
 import net.awyvrix.bot.init.DevelopersInit;
 import net.awyvrix.bot.media.Submission;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
