@@ -4,6 +4,7 @@ import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.DataManager;
 import net.awyvrix.bot.data.user.UserTag;
+import net.awyvrix.bot.exceptions.ErrorHandler;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
@@ -42,11 +43,7 @@ public final class Save implements Command {
     @Override
     public void execute(Update update) throws TelegramApiException {
         if (executeRights(client, data.users(), update, UserTag.DEVELOPER, UserTag.ADMIN)) {
-            try {
-                data.save();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            data.save();
             LOGGER.info("Forced Save executed\n  |Actor: {}", update.getMessage().getFrom().getUserName());
             sendMessage(client, update,"✅ Successfully saved");
         }

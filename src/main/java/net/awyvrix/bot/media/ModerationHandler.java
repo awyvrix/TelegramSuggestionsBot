@@ -52,10 +52,12 @@ public final class ModerationHandler {
         synchronized (BotState.LOCK) {
             Map<Long, Submission> submissions = data.submissions();
             Submission submission = submissions.get(submissionId);
-            deleteModerationMessage(query);
-            submissions.remove(submissionId);
 
             if (submission == null) return;
+            deleteModerationMessage(query);
+            replyToModerationMessage(query, "\uD83D\uDC4E");
+            submissions.remove(submissionId);
+
             replyStatus(submission.sourceChatId(), submission.sourceMessageId(), "\uD83D\uDC4E");
         }
     }
@@ -66,9 +68,10 @@ public final class ModerationHandler {
             Submission submission = submissions.get(submissionId);
 
             if (submission == null) return;
-            publisher.submit(submission, spoiler);
+            publisher.submitFirst(submission, spoiler);
 
             deleteModerationMessage(query);
+            replyToModerationMessage(query, "\uD83D\uDC4D");
             submissions.remove(submissionId);
 
             replyStatus(submission.sourceChatId(), submission.sourceMessageId(), "\uD83D\uDC4D");
@@ -85,6 +88,17 @@ public final class ModerationHandler {
                 .chatId(query.getMessage().getChatId())
                 .messageId(query.getMessage().getMessageId())
                 .build());
+    }
+
+    private void replyToModerationMessage(CallbackQuery query, String emoji) throws TelegramApiException {
+        if (!config.KEEP_SUBMISSIONS) return;
+        if (query.getMessage() == null) return;
+        SetMessageReaction reaction = SetMessageReaction.builder()
+                .chatId(query.getMessage().getChatId())
+                .messageId(query.getMessage().getMessageId())
+                .reactionTypes(List.of(new ReactionTypeEmoji(emoji)))
+                .build();
+        client.execute(reaction);
     }
 
     private void replyStatus(long chatId, int messageId, String emoji) throws TelegramApiException {

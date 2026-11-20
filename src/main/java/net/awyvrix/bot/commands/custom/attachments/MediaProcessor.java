@@ -111,7 +111,7 @@ public final class MediaProcessor implements Command {
             return;
 
         } if (data.users().getTag(authorId, author, UserTag.ADMIN)) {
-            publisher.submit(submission, submission.isSpoiler());
+            publisher.submitLast(submission, submission.isSpoiler());
             Util.replyEmoji(client, chatId, messageId, "\uD83D\uDC4D");
             Util.sendMessage(client, update, "⚙️ Контент принудительно отправлен");
 

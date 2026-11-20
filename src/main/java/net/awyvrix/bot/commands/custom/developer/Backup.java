@@ -4,6 +4,7 @@ import net.awyvrix.bot.commands.Command;
 import net.awyvrix.bot.commands.CommandType;
 import net.awyvrix.bot.data.DataManager;
 import net.awyvrix.bot.data.user.UserTag;
+import net.awyvrix.bot.exceptions.ErrorHandler;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
@@ -43,11 +44,7 @@ public final class Backup implements Command {
     public void execute(Update update) throws TelegramApiException {
         if (executeRights(client, data.users(), update, UserTag.DEVELOPER, UserTag.ADMIN)) {
             String nickname = update.getMessage().getFrom().getUserName();
-            try {
-                data.backup("forced-" + nickname);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            data.backup("forced-" + nickname);
             LOGGER.info("Forced Backup executed\n  |Actor: {}", nickname);
             sendMessage(client, update,"✅ Backup successfully completed");
         }

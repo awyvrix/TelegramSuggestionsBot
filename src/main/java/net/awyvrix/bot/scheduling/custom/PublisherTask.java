@@ -39,11 +39,7 @@ public class PublisherTask implements ScheduledTask {
         Submission submission = queue.peek();
 
         if (submission == null) return;
-        try {
-            publisher.publish();
-            dataManager.save();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        publisher.publish();
+        dataManager.save();
     }
 }
