@@ -22,12 +22,7 @@ public class ReloadConfigCommand implements ConsoleCommand {
     @Override
     public void execute(String[] args) {
         LOGGER.info("Reloading config...");
-        try {
-            ConfigManager.load();
-            LOGGER.info("Config successfully reloaded...");
-        } catch (IOException e) {
-            LOGGER.error("Error while reloading config...");
-            throw new RuntimeException(e);
-        }
+        ConfigManager.load();
+        LOGGER.info("Config successfully reloaded...");
     }
 }

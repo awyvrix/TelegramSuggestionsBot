@@ -1,5 +1,7 @@
 package net.awyvrix.bot.scheduling;
 
+import net.awyvrix.bot.exceptions.ErrorHandler;
+
 import java.util.concurrent.locks.LockSupport;
 
 import static net.awyvrix.bot.Main.LOGGER;
@@ -19,7 +21,7 @@ public final class ProcessorThread extends Thread {
             try {
                 taskScheduler.tick();
             } catch (RuntimeException e) {
-                LOGGER.error("Task caused an exception: {}", String.valueOf(e));
+                ErrorHandler.report("Failed to compete task", e);
             }
 
             long delta = taskScheduler.delta();

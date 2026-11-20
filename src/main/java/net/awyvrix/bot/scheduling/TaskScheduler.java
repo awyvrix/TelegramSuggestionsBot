@@ -1,5 +1,7 @@
 package net.awyvrix.bot.scheduling;
 
+import net.awyvrix.bot.exceptions.ErrorHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class TaskScheduler {
                     entry.execute();
                     completed++;
                 } catch (RuntimeException e) {
-                    LOGGER.error("Scheduled task failed", e);
+                    ErrorHandler.report("Failed to execute scheduled task", e);
                 } finally {
                     entry.update();
                 }

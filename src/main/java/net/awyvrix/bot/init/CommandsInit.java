@@ -33,6 +33,7 @@ public final class CommandsInit {
         registry.register(new AdminList(context.botDataManager(), client));
         registry.register(new Debug(taskScheduler, networkMonitor, data.users(), client));
         registry.register(new Report(networkMonitor, data.users(), client));
+        registry.register(new Logs(context.commandManager(), data.users(), client));
 
         registry.register(new Anon(context.botDataManager().users(), client));
         registry.register(new Statistics(context.botDataManager(), client));

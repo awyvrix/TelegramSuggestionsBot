@@ -16,6 +16,7 @@ import static net.awyvrix.bot.data.config.ConfigManager.config;
 public final class User {
     private String username;
     private final Set<UserTag> tags = new HashSet<>();
+    private Language language = Language.RU;
     private int submittedMediaCount = 0;
     private int approvedContentCount = 0;
 
@@ -98,5 +99,13 @@ public final class User {
 
     public synchronized String username() {
         return username;
+    }
+
+    public Language language() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 }

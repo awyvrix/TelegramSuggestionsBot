@@ -1,5 +1,6 @@
 package net.awyvrix.bot.debug;
 
+import net.awyvrix.bot.exceptions.ErrorHandler;
 import org.telegram.telegrambots.meta.api.methods.GetMe;
 import org.telegram.telegrambots.meta.generics.TelegramClient;
 
@@ -49,7 +50,7 @@ public final class NetworkMonitor {
             }
             failures++;
             totalFailures++;
-            LOGGER.error("Telegram API failure #{}: {}", failures, e.toString());
+            ErrorHandler.report("Telegram API failure", e, "failures", failures);
             return false;
         }
     }

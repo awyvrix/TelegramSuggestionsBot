@@ -2,6 +2,7 @@ package net.awyvrix.bot.data.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import net.awyvrix.bot.exceptions.ErrorHandler;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,14 +16,22 @@ public class ConfigManager {
 
     public static Config config = new Config();
 
-    public static void save() throws IOException {
-        MAPPER.writeValue(FILE.toFile(), config);
+    public static void save() {
+        try {
+            MAPPER.writeValue(FILE.toFile(), config);
+        } catch (Exception e) {
+            ErrorHandler.report("Failed to save config", e);
+        }
     }
 
-    public static void load() throws IOException {
+    public static void load() {
         if (Files.exists(FILE)) {
-            config = MAPPER.readValue(FILE.toFile(), Config.class);
-            MAPPER.readerForUpdating(config).readValue(FILE.toFile());
+            try {
+                config = MAPPER.readValue(FILE.toFile(), Config.class);
+                MAPPER.readerForUpdating(config).readValue(FILE.toFile());
+            } catch (Exception e) {
+                ErrorHandler.report("Failed to load config", e);
+            }
             LOGGER.info("Config loaded");
 
             if (!checkValues()) throw new IllegalStateException("None of entries can be less or equals 0");

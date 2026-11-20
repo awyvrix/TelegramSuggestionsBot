@@ -8,6 +8,7 @@ import net.awyvrix.bot.data.SaveManager;
 import net.awyvrix.bot.data.config.ConfigManager;
 import net.awyvrix.bot.data.config.StaticConfigManager;
 import net.awyvrix.bot.debug.NetworkMonitor;
+import net.awyvrix.bot.exceptions.ErrorHandler;
 import net.awyvrix.bot.init.CommandsInit;
 import net.awyvrix.bot.init.ConsoleCommandsInit;
 import net.awyvrix.bot.init.TaskInit;
@@ -37,7 +38,7 @@ public class Bot {
 
     private final ConsoleManager consoleManager;
 
-    public Bot(String token) throws IOException {
+    public Bot(String token) {
         ConfigManager.load();
         this.context = new BotContext();
 
@@ -57,19 +58,15 @@ public class Bot {
             processorThread.shutdown();
             try {
                 processorThread.join();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
+            } catch (Exception e) {
+                ErrorHandler.report("Failed to join processorThread", e);
             }
-            try {
-                context.botDataManager().save();
-                context.botDataManager().backup("shutdown");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+            context.botDataManager().save();
+            context.botDataManager().backup("shutdown");
         }));
     }
 
-    public void start() throws IOException {
+    public void start() {
         LOGGER.info("Starting bot... [{}]", StaticConfigManager.config.NAME);
 
         CommandsInit.initialise(client, context, context.commandManager(), context.botDataManager(),

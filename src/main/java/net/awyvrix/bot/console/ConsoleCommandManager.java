@@ -17,7 +17,7 @@ public class ConsoleCommandManager {
 
         ConsoleCommand command = commands.get(parts[0].toLowerCase());
         if (command == null) {
-            System.out.println("Unknown command. Use 'help'.");
+            System.out.println("Unknown command. Use 'help'");
             return;
         }
 

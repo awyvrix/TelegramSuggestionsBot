@@ -2,6 +2,7 @@ package net.awyvrix.bot.media;
 
 import net.awyvrix.bot.data.BotState;
 import net.awyvrix.bot.data.DataManager;
+import net.awyvrix.bot.exceptions.ErrorHandler;
 import org.telegram.telegrambots.meta.api.methods.GetFile;
 import org.telegram.telegrambots.meta.api.methods.send.SendDocument;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
@@ -13,11 +14,12 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 import static net.awyvrix.bot.Main.LOGGER;
 
 public final class Publisher {
-    public static final Queue<Submission> queue = new ConcurrentLinkedQueue<>();
+    public static final LinkedBlockingDeque<Submission> queue = new LinkedBlockingDeque<>();
     private final long channelId;
 
     private final TelegramClient client;
@@ -29,12 +31,21 @@ public final class Publisher {
         this.data = data;
     }
 
-    public void submit(Submission submission, boolean spoiler) {
+    public void submitFirst(Submission submission, boolean spoiler) {
         synchronized (BotState.LOCK) {
             data.users().getOrCreate(submission.authorId(), submission.authorDisplayName()).addApproved();
             data.increaseApprovedContent();
             data.sentContent().addToSent(submission.media().uniqueId());
-            queue.add(submission.setSpoiler(spoiler));
+            queue.addFirst(submission.setSpoiler(spoiler));
+        }
+    }
+
+    public void submitLast(Submission submission, boolean spoiler) {
+        synchronized (BotState.LOCK) {
+            data.users().getOrCreate(submission.authorId(), submission.authorDisplayName()).addApproved();
+            data.increaseApprovedContent();
+            data.sentContent().addToSent(submission.media().uniqueId());
+            queue.addLast(submission.setSpoiler(spoiler));
         }
     }
 
@@ -59,9 +70,9 @@ public final class Publisher {
                 discard(submission, e.getApiResponse());
                 return;
             }
-            throw new RuntimeException(e);
+            ErrorHandler.report("Failed to compete request", e);
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            ErrorHandler.report("Failed publish", e, "submissionId", submission.media().uniqueId());
         }
 
         try {
@@ -91,7 +102,7 @@ public final class Publisher {
                 data.publishedContent().addToSent(submission.media().uniqueId());
             }
         } catch (TelegramApiException e) {
-            throw new RuntimeException(e);
+            ErrorHandler.report("Failed publish", e, "submissionId", submission.media().uniqueId());
         }
     }
 

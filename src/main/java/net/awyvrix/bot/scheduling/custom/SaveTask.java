@@ -26,10 +26,6 @@ public final class SaveTask implements ScheduledTask {
 
     @Override
     public void execute() {
-        try {
-            dataManager.save();
-        } catch (IOException e) {
-            throw new RuntimeException("Periodic data save failed", e);
-        }
+        dataManager.save();
     }
 }

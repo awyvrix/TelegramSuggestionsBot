@@ -4,6 +4,7 @@ import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.user.UserData;
 import net.awyvrix.bot.data.util.DataSnapshot;
 import net.awyvrix.bot.data.util.SetSnapshot;
+import net.awyvrix.bot.exceptions.ErrorHandler;
 import net.awyvrix.bot.init.AdminsInit;
 import net.awyvrix.bot.init.DevelopersInit;
 import net.awyvrix.bot.media.Submission;
@@ -36,8 +37,13 @@ public final class DataManager {
         this.saveManager = saveManager;
     }
 
-    private void loadData() throws IOException {
-        DataSnapshot snapshot = saveManager.load();
+    private void loadData() {
+        DataSnapshot snapshot = null;
+        try {
+            snapshot = saveManager.load();
+        } catch (Exception e) {
+            ErrorHandler.report("Failed to load data", e);
+        }
         users.users().putAll(snapshot.users);
         queue.addAll(snapshot.queue);
         submissions.putAll(snapshot.submissions);
@@ -78,15 +84,23 @@ public final class DataManager {
         approvedContent = approved;
     }
 
-    public void backup(String type) throws IOException {
-        saveManager.backup(createSnapshot(), type);
+    public void backup(String type) {
+        try {
+            saveManager.backup(createSnapshot(), type);
+        } catch (Exception e) {
+            ErrorHandler.report("Failed to backup data", e, "type", type);
+        }
     }
 
-    public void save() throws IOException {
-        saveManager.save(createSnapshot());
+    public void save() {
+        try {
+            saveManager.save(createSnapshot());
+        } catch (Exception e) {
+            ErrorHandler.report("Failed to save data", e);
+        }
     }
 
-    public void load() throws IOException {
+    public void load() {
         loadData();
     }
 
