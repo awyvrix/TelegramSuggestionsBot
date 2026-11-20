@@ -5,6 +5,7 @@ build/
 !**/src/test/**/build/
 .kotlin
 src/main/java/net/awyvrix/bot/commands/custom/fun/
+data.json
 data1.json
 bot.json
 config.json
@@ -52,4 +53,5 @@ bin/
 
 /src/main/java/net/awyvrix/bot/translation/
 /src/main/java/net/awyvrix/bot/commands/custom/Lang.java
-/src/main/java/net/awyvrix/bot/data/user/Language.java
+/src/main/TelegramSuggestionsBot_audit.md
+/src/main/TelegramSuggestionsBot_audit_v2.md
