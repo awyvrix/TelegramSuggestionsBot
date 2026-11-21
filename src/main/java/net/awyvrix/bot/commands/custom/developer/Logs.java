@@ -68,7 +68,14 @@ public final class Logs implements ArgumentCommand {
                 String arg1 = argument.arguments().getFirst();
 
                 if (arg1.equals("current") || arg1.equals("latest")) {
-                    Path path = Path.of("/logs/current.log");
+                    Path path = Path.of("logs/current.log");
+                    client.execute(SendDocument.builder()
+                            .chatId(update.getMessage().getChatId())
+                            .document(new InputFile(path.toFile()))
+                            .build());
+                    return;
+                } if (arg1.equals("errors")) {
+                    Path path = Path.of("logs/errors.log");
                     client.execute(SendDocument.builder()
                             .chatId(update.getMessage().getChatId())
                             .document(new InputFile(path.toFile()))

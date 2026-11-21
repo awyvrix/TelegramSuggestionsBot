@@ -8,7 +8,7 @@ import net.awyvrix.bot.scheduling.ScheduledTask;
 
 import java.util.concurrent.TimeUnit;
 
-import static net.awyvrix.bot.Main.MAINTENANCE;
+import static net.awyvrix.bot.Main.MAINTENANCE_MODE;
 import static net.awyvrix.bot.data.config.ConfigManager.config;
 import static net.awyvrix.bot.media.Publisher.queue;
 
@@ -34,7 +34,7 @@ public class PublisherTask implements ScheduledTask {
     @Override
     public void execute() {
         if (queue.isEmpty()) return;
-        if (MAINTENANCE) return;
+        if (MAINTENANCE_MODE) return;
         Submission submission = queue.peek();
 
         if (submission == null) return;

@@ -19,7 +19,7 @@ public final class Config {
     public int MAX_VIDEO_SIZE = 60;
     public int MAX_DOCUMENT_SIZE = 20;
 
-    public boolean KEEP_SUBMISSIONS = true;
+    public boolean KEEP_SUBMISSIONS = false;
     public int PUBLICATION_PERIOD = 1800;
     public int USER_PERIOD = 600;
 
@@ -30,9 +30,13 @@ public final class Config {
     public int BASIC_RECOVERY = 1;
 
     public int ACTIONS_DELTA = 10;
+    public int RECOVERY_DELTA = 20;
 
     public float SPAM_FINE = 0.01F;
     public float REPEAT_FINE = 0.01F;
     public float MOD_SPAM_FINE = 0.03F;
     public float ACCEPT_BONUS = 0.08F;
+
+    public float PUNISH_FINE = 15F;
+    public int PUNISH_TIMER = 86400;
 }

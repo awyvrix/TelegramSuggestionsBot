@@ -31,10 +31,15 @@ public class UpdateUserTask implements ScheduledTask {
     public void execute() {
         synchronized (BotState.LOCK) {
             for (User user : dataManager.users().users().values()) {
-                int level = (int) (Math.floor(user.rating()) / config.ACTIONS_DELTA);
-                int recovery = Math.min(config.MAX_RECOVERY, config.BASIC_RECOVERY + level);
-                int maxActions = Math.min(config.MAX_ACTIONS, config.BASIC_ACTIONS + level);
+                int actionsLevel = (int) (Math.floor(user.rating()) / config.ACTIONS_DELTA);
+                int recoveryLevel = (int) (Math.floor(user.rating()) / config.RECOVERY_DELTA);
+                int recovery = Math.min(config.MAX_RECOVERY, config.BASIC_RECOVERY + recoveryLevel);
+                int maxActions = Math.min(config.MAX_ACTIONS, config.BASIC_ACTIONS + actionsLevel);
                 user.setActions(Math.min(maxActions, user.actions() + recovery));
+
+                if (user.muteTime() > 0) {
+                    user.setMute(Math.max(0, user.muteTime() - (config.TEST_MODE ? config.TEST_USER_PERIOD : config.USER_PERIOD)));
+                }
             }
         }
     }

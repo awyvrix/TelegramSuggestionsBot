@@ -41,12 +41,14 @@ public final class Rating implements Command {
     public void execute(Update update) throws TelegramApiException {
         User u = update.getMessage().getFrom();
         net.awyvrix.bot.data.user.User user = data.getOrCreate(u.getId(), u.getUserName());
-        int level = (int) (Math.floor(user.rating()) / config.ACTIONS_DELTA);
-        int recovery = Math.min(config.MAX_RECOVERY, config.BASIC_RECOVERY + level);
-        int maxActions = Math.min(config.MAX_ACTIONS, config.BASIC_ACTIONS + level);
+        int actionsLevel = (int) (Math.floor(user.rating()) / config.ACTIONS_DELTA);
+        int recoveryLevel = (int) (Math.floor(user.rating()) / config.RECOVERY_DELTA);
+        int recovery = Math.min(config.MAX_RECOVERY, config.BASIC_RECOVERY + recoveryLevel);
+        int maxActions = Math.min(config.MAX_ACTIONS, config.BASIC_ACTIONS + actionsLevel);
 
         String res = "Сводка о " + user.username() +
-                "\n | Level: " + level +
+                "\n | ActionsLevel: " + actionsLevel +
+                "\n | RecoveryLevel: " + recoveryLevel +
                 "\n | Rating: " + user.rating() +
                 "\n | Actions: " + user.actions() +
                 "\n | Recovery: " + recovery +
