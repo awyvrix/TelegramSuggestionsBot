@@ -7,6 +7,7 @@ import net.awyvrix.bot.data.user.User;
 import net.awyvrix.bot.data.user.UserTag;
 import org.telegram.telegrambots.meta.api.methods.reactions.SetMessageReaction;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageReplyMarkup;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.reactions.ReactionTypeEmoji;
@@ -45,6 +46,7 @@ public final class ModerationHandler {
             case "reject" -> reject(query, submissionId);
             case "approve" -> approve(query, submissionId, false);
             case "spoiler" -> approve(query, submissionId, true);
+            case "punish" -> punish(query, submissionId);
         }
     }
 
@@ -54,7 +56,7 @@ public final class ModerationHandler {
             Submission submission = submissions.get(submissionId);
 
             if (submission == null) return;
-            deleteModerationMessage(query);
+            deleteModerationMessage(query, false);
             replyToModerationMessage(query, "\uD83D\uDC4E");
             submissions.remove(submissionId);
 
@@ -70,7 +72,7 @@ public final class ModerationHandler {
             if (submission == null) return;
             publisher.submitFirst(submission, spoiler);
 
-            deleteModerationMessage(query);
+            deleteModerationMessage(query, false);
             replyToModerationMessage(query, "\uD83D\uDC4D");
             submissions.remove(submissionId);
 
@@ -81,33 +83,65 @@ public final class ModerationHandler {
         }
     }
 
-    private void deleteModerationMessage(CallbackQuery query) throws TelegramApiException {
-        if (!config.KEEP_SUBMISSIONS) return;
-        if (query.getMessage() == null) return;
-        client.execute(DeleteMessage.builder()
-                .chatId(query.getMessage().getChatId())
-                .messageId(query.getMessage().getMessageId())
-                .build());
+    private void deleteModerationMessage(CallbackQuery query, boolean isForced) throws TelegramApiException {
+        synchronized (BotState.LOCK) {
+            if (query.getMessage() == null) return;
+            if (config.KEEP_SUBMISSIONS && !isForced) {
+                client.execute(EditMessageReplyMarkup.builder()
+                        .chatId(query.getMessage().getChatId())
+                        .messageId(query.getMessage().getMessageId())
+                        .build());
+
+            } else if (isForced) {
+                client.execute(DeleteMessage.builder()
+                        .chatId(query.getMessage().getChatId())
+                        .messageId(query.getMessage().getMessageId())
+                        .build());
+            }
+        }
     }
 
     private void replyToModerationMessage(CallbackQuery query, String emoji) throws TelegramApiException {
-        if (!config.KEEP_SUBMISSIONS) return;
-        if (query.getMessage() == null) return;
-        SetMessageReaction reaction = SetMessageReaction.builder()
-                .chatId(query.getMessage().getChatId())
-                .messageId(query.getMessage().getMessageId())
-                .reactionTypes(List.of(new ReactionTypeEmoji(emoji)))
-                .build();
-        client.execute(reaction);
+        synchronized (BotState.LOCK) {
+            if (!config.KEEP_SUBMISSIONS) return;
+            if (query.getMessage() == null) return;
+            SetMessageReaction reaction = SetMessageReaction.builder()
+                    .chatId(query.getMessage().getChatId())
+                    .messageId(query.getMessage().getMessageId())
+                    .reactionTypes(List.of(new ReactionTypeEmoji(emoji)))
+                    .build();
+            client.execute(reaction);
+        }
     }
 
     private void replyStatus(long chatId, int messageId, String emoji) throws TelegramApiException {
-        SetMessageReaction reaction = SetMessageReaction.builder()
-                .chatId(chatId)
-                .messageId(messageId)
-                .reactionTypes(List.of(new ReactionTypeEmoji(emoji)))
-                .build();
+        synchronized (BotState.LOCK) {
+            SetMessageReaction reaction = SetMessageReaction.builder()
+                    .chatId(chatId)
+                    .messageId(messageId)
+                    .reactionTypes(List.of(new ReactionTypeEmoji(emoji)))
+                    .build();
+            client.execute(reaction);
+        }
+    }
 
-        client.execute(reaction);
+    private void punish(CallbackQuery query, long submissionId) throws TelegramApiException {
+        synchronized (BotState.LOCK) {
+            Map<Long, Submission> submissions = data.submissions();
+            Submission submission = submissions.get(submissionId);
+
+            if (submission == null) return;
+            deleteModerationMessage(query, true);
+            submissions.remove(submissionId);
+
+            replyStatus(submission.sourceChatId(), submission.sourceMessageId(), "\uD83E\uDD28");
+            User user = data.users().get(submission.authorId());
+            data.blockedContent().addToSent(submission.media().uniqueId());
+
+            if (user != null) {
+                user.increaseRating(-config.PUNISH_FINE);
+                user.mute(config.PUNISH_TIMER);
+            }
+        }
     }
 }

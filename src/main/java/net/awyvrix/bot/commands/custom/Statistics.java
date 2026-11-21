@@ -44,6 +44,7 @@ public final class Statistics implements Command {
                 " |\n" +
                 " | Заблокировано спама: " + data.spamBlocked() + "\n" +
                 " | Заблокировано баянов: " + data.repeatBlocked() + "\n" +
+                " | Заблокировано нарушений: " + data.blockedCount() + "\n" +
                 " |\n" +
                 " | Уникальных пользователей: " + data.users().users().size() + "\n");
     }

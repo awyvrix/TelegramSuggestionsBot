@@ -12,6 +12,8 @@ public final class DataSnapshot {
     public Set<String> onMod = new HashSet<>();
     public Set<String> published = new HashSet<>();
     public Set<String> hashed = new HashSet<>();
+    public Set<String> blocked = new HashSet<>();
+
     public Map<Long, User> users = new HashMap<>();
     public List<Submission> queue = new ArrayList<>();
     public Map<Long, Submission> submissions = new HashMap<>();
@@ -23,6 +25,8 @@ public final class DataSnapshot {
     public int receivedMediaCount = 0;
     public int appliedContent = 0;
     public int approvedContent = 0;
+
+    public int blockedCount = 0;
 
     public void normalize() {
         if (sent == null) sent = new HashSet<>();

@@ -40,7 +40,7 @@ public final class Status implements Command {
     @Override
     public void execute(Update update) throws TelegramApiException {
         StringBuilder debug = new StringBuilder("Check successful:\n");
-        String status = Main.MAINTENANCE ? "Bot is currently under maintenance \uD83D\uDEE0\uFE0F" : "All systems online";
+        String status = Main.MAINTENANCE_MODE ? "Bot is currently under maintenance \uD83D\uDEE0\uFE0F" : "All systems online";
         if (config.TEST_MODE) status += ". Bot is launched in test mode \uD83D\uDEE0\uFE0F";
 
         if (monitor.check(false)) {

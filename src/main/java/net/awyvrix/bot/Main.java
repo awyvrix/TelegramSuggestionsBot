@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Main extends DefaultLongPollingUpdateConsumer {
     public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-    public static boolean MAINTENANCE = false;
+    public static boolean MAINTENANCE_MODE = false;
 
     private final Bot bot;
 

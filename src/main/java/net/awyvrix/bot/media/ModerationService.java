@@ -25,7 +25,8 @@ public final class ModerationService {
                 .keyboardRow(new InlineKeyboardRow(
                         button("❌ Отклонить", "reject:" + submissionId),
                         button("✅ Одобрить", "approve:" + submissionId),
-                        button("⚠️ Спойлер", "spoiler:" + submissionId)
+                        button("⚠️ Спойлер", "spoiler:" + submissionId),
+                        button("\uD83D\uDDE1\uFE0F Эшафот", "punish:" + submissionId)
                 ))
                 .build();
 

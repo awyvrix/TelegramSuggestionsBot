@@ -11,7 +11,7 @@ import org.telegram.telegrambots.meta.generics.TelegramClient;
 import java.util.Set;
 
 import static net.awyvrix.bot.Main.LOGGER;
-import static net.awyvrix.bot.Main.MAINTENANCE;
+import static net.awyvrix.bot.Main.MAINTENANCE_MODE;
 import static net.awyvrix.bot.Util.executeRights;
 import static net.awyvrix.bot.Util.sendMessage;
 
@@ -42,9 +42,9 @@ public final class Maintenance implements Command {
     @Override
     public void execute(Update update) throws TelegramApiException {
         if (executeRights(client, data, update, UserTag.DEVELOPER, UserTag.ADMIN)) {
-            MAINTENANCE = !MAINTENANCE;
-            LOGGER.warn("Maintenance mode: {}\n  |Actor: {}", MAINTENANCE, update.getMessage().getFrom().getUserName());
-            sendMessage(client, update, "\uD83D\uDEE0\uFE0F Maintenance mode: " + (MAINTENANCE ? "Enabled" : "Disabled"));
+            MAINTENANCE_MODE = !MAINTENANCE_MODE;
+            LOGGER.warn("Maintenance mode: {}\n  |Actor: {}", MAINTENANCE_MODE, update.getMessage().getFrom().getUserName());
+            sendMessage(client, update, "\uD83D\uDEE0\uFE0F Maintenance mode: " + (MAINTENANCE_MODE ? "Enabled" : "Disabled"));
         }
     }
 }

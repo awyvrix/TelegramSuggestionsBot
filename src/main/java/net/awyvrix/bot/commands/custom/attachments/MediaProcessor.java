@@ -80,13 +80,20 @@ public final class MediaProcessor implements Command {
         user.updateUsername(author);
 
         String hash = getMediaHash(client, update, monitor, media);
+        int recoveryLevel = (int) (Math.floor(user.rating()) / config.RECOVERY_DELTA);
+        int recovery = Math.min(config.MAX_RECOVERY, config.BASIC_RECOVERY + recoveryLevel);
 
-        if (Math.floor(user.rating()) + config.BASIC_ACTIONS <= 0) {
+        if (recovery <= 0) {
             Util.replyEmoji(client, chatId, messageId, "\uD83D\uDC4E");
-            Util.sendMessage(client, update, "❌ Вы были перманентно забанены за свои деяния [м2]");
+            Util.sendMessage(client, update, "❌ Вы были перманентно забанены за свои деяния [м3]");
             return;
+        } if (user.muteTime() > 0) {
+            Util.replyEmoji(client, chatId, messageId, "\uD83D\uDC4E");
+            Util.sendMessage(client, update, "❌ Вам запрещено отправлять контент в течение: " + user.muteTime() + "сек [м5]");
+            return;
+        }
 
-        } if (config.TEST_MODE) {
+        if (config.TEST_MODE) {
             Util.sendMessage(client, update, "⚠ Бот находится в тестовом режиме. Контент может быть не отправлен. Попробуйте позже");
 
         } if (user.actions() <= 0) {
@@ -110,7 +117,17 @@ public final class MediaProcessor implements Command {
             Util.sendMessage(client, update, "❌ Контент не был отправлен: Уже на модерации [м1]");
             return;
 
-        } if (data.users().getTag(authorId, author, UserTag.ADMIN)) {
+        } if (data.blockedContent().contains(media.uniqueId())) {
+            data.increaseBlocked();
+            user.increaseRating(-config.PUNISH_FINE);
+            user.mute(config.PUNISH_TIMER);
+
+            Util.replyEmoji(client, chatId, messageId, "\uD83E\uDD28");
+            Util.sendMessage(client, update, "❌ Контент не был отправлен: Нарушение правил [м5]");
+            return;
+        }
+
+        if (data.users().getTag(authorId, author, UserTag.ADMIN)) {
             publisher.submitLast(submission, submission.isSpoiler());
             Util.replyEmoji(client, chatId, messageId, "\uD83D\uDC4D");
             Util.sendMessage(client, update, "⚙️ Контент принудительно отправлен");

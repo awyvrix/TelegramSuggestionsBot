@@ -20,6 +20,8 @@ public final class User {
     private int submittedMediaCount = 0;
     private int approvedContentCount = 0;
 
+    private int muteTime = 0;
+
     private float rating = 0;
     private int actions = config.BASIC_ACTIONS;
 
@@ -107,5 +109,21 @@ public final class User {
 
     public void setLanguage(Language language) {
         this.language = language;
+    }
+
+    public int muteTime() {
+        return muteTime;
+    }
+
+    public void mute(int time) {
+        if (muteTime < time) muteTime = time;
+    }
+
+    public void setMute(int time) {
+        muteTime = time;
+    }
+
+    public void unmute() {
+        muteTime = 0;
     }
 }

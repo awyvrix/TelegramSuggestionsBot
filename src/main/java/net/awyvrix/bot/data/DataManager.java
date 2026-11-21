@@ -21,16 +21,18 @@ public final class DataManager {
     private final UserData users = new UserData();
     private final Map<Long, Submission> submissions = new ConcurrentHashMap<>();
 
-    private int receivedMediaCount = 0; // sentContent
-    private int appliedContent = 0; // appliedContent
-    private int approvedContent = 0; // approvedContent
-    private int repeatBlocked = 0; // repeatBlocked
-    private int spamBlocked = 0; // spamBlocked
+    private int receivedMediaCount = 0;
+    private int appliedContent = 0;
+    private int approvedContent = 0;
+    private int repeatBlocked = 0;
+    private int spamBlocked = 0;
+    private int blockedCount = 0;
 
-    private final SetSnapshot sentContent = new SetSnapshot(); // sentContent
-    private final SetSnapshot sentHashedContent = new SetSnapshot(); // sentHashedContent
-    private final SetSnapshot onModContent = new SetSnapshot(); // onModContent
-    private final SetSnapshot publishedContent = new SetSnapshot(); // publishedContent
+    private final SetSnapshot sentContent = new SetSnapshot();
+    private final SetSnapshot sentHashedContent = new SetSnapshot();
+    private final SetSnapshot onModContent = new SetSnapshot();
+    private final SetSnapshot publishedContent = new SetSnapshot();
+    private final SetSnapshot blockedContent = new SetSnapshot();
 
     public DataManager(SaveManager saveManager) {
         this.saveManager = saveManager;
@@ -43,6 +45,8 @@ public final class DataManager {
         } catch (Exception e) {
             ErrorHandler.report("Failed to load data", e);
         }
+
+        if (snapshot == null) return;
         users.users().putAll(snapshot.users);
         queue.addAll(snapshot.queue);
         submissions.putAll(snapshot.submissions);
@@ -53,11 +57,14 @@ public final class DataManager {
         onModContent.sent().addAll(snapshot.onMod);
         sentHashedContent.sent().addAll(snapshot.hashed);
 
+        blockedContent.sent().addAll(snapshot.blocked);
+
         receivedMediaCount = snapshot.receivedMediaCount;
         appliedContent = snapshot.appliedContent;
         approvedContent = snapshot.approvedContent;
         repeatBlocked = snapshot.repeatBlocked;
         spamBlocked = snapshot.spamBlocked;
+        blockedCount = snapshot.blockedCount;
 
         NEXT_ID.set(snapshot.nextSubmissionId);
 
@@ -113,11 +120,14 @@ public final class DataManager {
             snapshot.published.addAll(publishedContent.copy());
             snapshot.onMod.addAll(onModContent.copy());
             snapshot.hashed.addAll(sentHashedContent.copy());
+            snapshot.blocked.addAll(blockedContent.copy());
+
             snapshot.receivedMediaCount = receivedMediaCount;
             snapshot.appliedContent = appliedContent;
             snapshot.approvedContent = approvedContent;
             snapshot.repeatBlocked = repeatBlocked;
             snapshot.spamBlocked = spamBlocked;
+            snapshot.blockedCount = blockedCount;
             snapshot.nextSubmissionId = NEXT_ID.get();
             return snapshot;
         }
@@ -137,6 +147,10 @@ public final class DataManager {
 
     public SetSnapshot publishedContent() {
         return publishedContent;
+    }
+
+    public SetSnapshot blockedContent() {
+        return blockedContent;
     }
 
     public Map<Long, Submission> submissions() {
@@ -183,11 +197,19 @@ public final class DataManager {
         spamBlocked++;
     }
 
+    public void increaseBlocked() {
+        spamBlocked++;
+    }
+
     public UserData users() {
         return users;
     }
 
     public int userCount() {
         return users.users().size();
+    }
+
+    public int blockedCount() {
+        return blockedCount;
     }
 }
